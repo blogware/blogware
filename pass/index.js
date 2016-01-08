@@ -1,5 +1,6 @@
 var steps = [
-  'route', // updating the routing table
+  'record', // caching the input files
+  'route',  // updating the routing table
 ];
 
 function pass(file) {

@@ -1,11 +1,15 @@
-var fs = require('fs');
+var record = require('./record');
 
 function render(relative, cb) {
-  fs.readFile(relative, 'utf8', function(err, contents) {
-    if (err) return cb(err);
+  var file = record.r2f(relative);
 
-    cb(null, contents);
-  });
+  if (!file) {
+    return cb(new Error('File not found'));
+  }
+
+  var contents = file.contents.toString('utf8');
+
+  cb(null, contents);
 }
 
 module.exports = render;
