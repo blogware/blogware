@@ -1,14 +1,11 @@
 var through = require('through2');
-var route = require('./route');
+var pass = require('./pass');
 
 function stream() {
   return through.obj(function(file, _, cb) {
-    var relative = file.relative;
-    var location = relative;
-
-    route.add(relative, location);
-
-    cb();
+    pass(file)
+      .then(function() { cb() })
+      .catch(cb);
   });
 }
 
