@@ -1,6 +1,11 @@
 var gulp = require('gulp');
+var del = require('del');
 var app = require('./app');
 var stream = require('./stream');
+
+function clean() {
+  return del('_site');
+}
 
 function traverse() {
   return gulp.src(['**/*', '!_site{,/**/*}'])
@@ -13,4 +18,4 @@ function preview() {
   });
 }
 
-gulp.task('serve', gulp.series(traverse, preview));
+gulp.task('serve', gulp.series(clean, traverse, preview));
