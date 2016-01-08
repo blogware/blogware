@@ -1,6 +1,9 @@
 {
   "name": "blogware",
   "version": "0.0.1",
+  "bin": {
+    "blogware": "./bin/blogware.js"
+  },
   "dependencies": {
     "blogware-cli": "github:blogware/blogware-cli#4.0",
     "express": "^4.13.3",
