@@ -1,13 +1,11 @@
 var express = require('express');
-var route = require('./table').route;
 var render = require('./render');
 var app = express();
 
 app.get('*', function(req, res) {
   var location = req.url.slice(1);
-  var relative = route.l2r(location);
 
-  render(relative, function(err, rendered) {
+  render(location, function(err, rendered) {
     if (err) throw err;
 
     res.send(rendered);

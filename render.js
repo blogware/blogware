@@ -1,7 +1,9 @@
 var table = require('./table');
 var record = table.record;
+var route = table.route;
 
-function render(relative, cb) {
+function render(location, cb) {
+  var relative = route.l2r(location);
   var file = record.r2f(relative);
 
   if (!file) {
