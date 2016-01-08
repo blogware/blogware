@@ -1,8 +1,11 @@
-var route = require('./route');
+var steps = [
+  'route', // updating the routing table
+];
 
 function pass(file) {
-  return Promise.resolve(file)
-    .then(route);
+  return steps.reduce(function(promise, step) {
+    return promise.then(require('./' + step));
+  }, Promise.resolve(file));
 }
 
 module.exports = pass;
