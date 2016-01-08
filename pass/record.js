@@ -1,4 +1,5 @@
-var record = require('../record');
+var table = require('../table');
+var record = table.record;
 
 function pass(file) {
   var relative = file.relative;

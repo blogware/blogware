@@ -1,4 +1,5 @@
-var route = require('../route');
+var table = require('../table');
+var route = table.route
 
 function pass(file) {
   var relative = file.relative;

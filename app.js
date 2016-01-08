@@ -1,5 +1,5 @@
 var express = require('express');
-var route = require('./route');
+var route = require('./table').route;
 var render = require('./render');
 var app = express();
 

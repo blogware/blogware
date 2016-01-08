@@ -1,4 +1,5 @@
-var record = require('./record');
+var table = require('./table');
+var record = table.record;
 
 function render(relative, cb) {
   var file = record.r2f(relative);
