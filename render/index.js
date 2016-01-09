@@ -1,4 +1,4 @@
-var table = require('./table');
+var table = require('../table');
 var record = table.record;
 var route = table.route;
 
