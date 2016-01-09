@@ -13,7 +13,8 @@ function clean() {
 
 function traverse() {
   return gulp.src(['**/*', '!_site{,/**/*}'])
-    .pipe(stream());
+    .pipe(stream())
+    .pipe(gulp.dest('_site'));
 }
 
 function preview() {

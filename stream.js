@@ -3,8 +3,14 @@ var pass = require('./pass');
 
 function stream() {
   return through.obj(function(file, _, cb) {
+    var self = this;
     pass(file)
-      .then(function() { cb() })
+      .then(function(file) {
+        if (file.meta('type') === 'asset') {
+          self.push(file);
+        }
+        cb();
+      })
       .catch(cb);
   });
 }

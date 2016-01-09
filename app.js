@@ -2,6 +2,8 @@ var express = require('express');
 var render = require('./render');
 var app = express();
 
+app.use(express.static('_site'));
+
 app.get('*', function(req, res, next) {
   var location = req.url.slice(1);
 
