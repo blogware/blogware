@@ -1,3 +1,7 @@
+var plugin = require('./plugin');
+
+plugin.register();
+
 var gulp = require('gulp');
 var del = require('del');
 var app = require('./app');
