@@ -1,4 +1,5 @@
 var steps = [
+  'patch',  // monkey patching to add the meta method
   'record', // caching the input files
   'route',  // updating the routing table
 ];
