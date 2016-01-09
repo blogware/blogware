@@ -5,12 +5,9 @@ function pass(file) {
 
   return new Promise(function(resolve, reject) {
     var engine = file.meta('engine');
-    var contents = file.contents.toString('utf8');
 
-    engine.compile(contents, function(err, template) {
+    engine.compile(file, function(err, file) {
       if (err) return reject(err);
-
-      file.meta('template', template);
 
       resolve(file);
     });
