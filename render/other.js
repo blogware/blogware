@@ -1,10 +1,18 @@
-function render(file, cb) {
-  var engine = file.meta('engine');
+var path = require('path');
 
-  engine.render(file, {}, function(err, rendered) {
-    if (err) return cb(err);
+function render(location, file) {
+  return new Promise(function(resolve, reject) {
+    var engine = file.meta('engine');
 
-    cb(null, rendered);
+    engine.render(file, {}, function(err, rendered) {
+      if (err) return reject(err);
+
+      var clone = file.clone();
+      clone.path = path.resolve(clone.base, location);
+      clone.contents = new Buffer(rendered);
+
+      resolve(clone);
+    });
   });
 }
 

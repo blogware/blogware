@@ -1,7 +1,9 @@
-function render(file, cb) {
-  var contents = file.contents.toString('utf8');
+var path = require('path');
 
-  cb(null, contents);
+function render(location, file) {
+  var clone = file.clone();
+  clone.path = path.resolve(clone.base, location);
+  return Promise.resolve(clone);
 }
 
 module.exports = render;

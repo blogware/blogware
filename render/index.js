@@ -12,25 +12,23 @@ var renderers = {
   other: other
 }
 
-function render(location, cb) {
+function render(location) {
   var relative = route.l2r(location);
   var file = record.r2f(relative);
 
   if (!file) {
     var err = new Error('Not Found');
     err.status = 404;
-    return cb(err);
+    return Promise.reject(err);
   }
 
   var renderer = renderers[file.meta('type')];
 
   if (renderer) {
-    renderer(file, function(err, rendered) {
-      if (err) return cb(err);
-      cb(null, rendered);
-    });
+    return renderer(location, file);
   } else {
-    cb(new Error('Unknown type: ' + relative));
+    var err = new Error('Unknown type: ' + relative);
+    return Promise.reject(err);
   }
 }
 

@@ -2,14 +2,16 @@ var express = require('express');
 var render = require('./render');
 var app = express();
 
-app.get('*', function(req, res) {
+app.get('*', function(req, res, next) {
   var location = req.url.slice(1);
 
-  render(location, function(err, rendered) {
-    if (err) throw err;
-
-    res.send(rendered);
-  });
+  render(location)
+    .then(function(file) {
+      res.send(file.contents.toString('utf8'));
+    })
+    .catch(function(err) {
+      next(err);
+    });
 });
 
 app.use(function(err, req, res, next) {
