@@ -7,7 +7,9 @@ function render(location, cb) {
   var file = record.r2f(relative);
 
   if (!file) {
-    return cb(new Error('File not found: ' + location));
+    var err = new Error('Not Found');
+    err.status = 404;
+    return cb(err);
   }
 
   if (file.meta('type') === 'asset') {
