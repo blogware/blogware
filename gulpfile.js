@@ -37,7 +37,8 @@ function watch() {
     .on('all', function(event, path) {
       gulp.src(path)
         .pipe(stream())
-        .pipe(gulp.dest('_site'));
+        .pipe(gulp.dest('_site'))
+        .pipe(bs.stream({ once: true }));
     });
 }
 
