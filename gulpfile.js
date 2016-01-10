@@ -17,10 +17,24 @@ function traverse() {
     .pipe(gulp.dest('_site'));
 }
 
-function preview() {
+function live() {
+  serve();
+  watch();
+}
+
+function serve() {
   app.listen(3000, function() {
     console.log('Listening on port 3000');
   });
 }
 
-gulp.task('serve', gulp.series(clean, traverse, preview));
+function watch() {
+  gulp.watch(['**/*', '!_site{,/**/*}'], {})
+    .on('all', function(event, path) {
+      gulp.src(path)
+        .pipe(stream())
+        .pipe(gulp.dest('_site'));
+    });
+}
+
+gulp.task('serve', gulp.series(clean, traverse, live));
