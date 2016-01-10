@@ -2,6 +2,7 @@ var steps = [
   'patch',   // monkey patching to add the meta method
   'engine',  // determing the file processor
   'type',    // asset, template or other
+  'matter',  // parsing frontmatter
   'compile', // precompiling templates
   'record',  // caching the input file
   'route',   // updating the routing table
