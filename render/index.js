@@ -1,7 +1,4 @@
 var table = require('../table');
-var record = table.record;
-var route = table.route;
-
 var asset = require('./asset');
 var template = require('./template');
 var other = require('./other');
@@ -13,8 +10,7 @@ var renderers = {
 }
 
 function render(location) {
-  var relative = route.l2r(location);
-  var file = record.r2f(relative);
+  var file = table.l2f(location);
 
   if (!file) {
     var err = new Error('Not Found');
@@ -25,7 +21,7 @@ function render(location) {
   var renderer = renderers[file.meta('type')];
 
   if (renderer) {
-    return renderer(location, file);
+    return renderer(location);
   } else {
     var err = new Error('Unknown type: ' + relative);
     return Promise.reject(err);

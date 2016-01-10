@@ -1,7 +1,9 @@
 var path = require('path');
+var table = require('../table');
 
-function render(location, file) {
+function render(location) {
   return new Promise(function(resolve, reject) {
+    var file = table.l2f(location);
     var engine = file.meta('engine');
 
     engine.render(file, {}, function(err, rendered) {
