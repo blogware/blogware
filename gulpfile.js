@@ -4,6 +4,7 @@ plugin.register();
 
 var gulp = require('gulp');
 var del = require('del');
+var bs = require('browser-sync').create();
 var app = require('./app');
 var stream = require('./stream');
 
@@ -23,8 +24,11 @@ function live() {
 }
 
 function serve() {
-  app.listen(3000, function() {
-    console.log('Listening on port 3000');
+  app.listen(4000, function() {
+    bs.init({
+      notify: false,
+      proxy: 'localhost:4000'
+    });
   });
 }
 
