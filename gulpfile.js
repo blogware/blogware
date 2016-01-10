@@ -27,7 +27,9 @@ function serve() {
   app.listen(4000, function() {
     bs.init({
       notify: false,
-      proxy: 'localhost:4000'
+      plugins: ['bs-html-injector'],
+      proxy: 'localhost:4000',
+      ui: false
     });
   });
 }
