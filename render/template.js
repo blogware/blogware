@@ -5,7 +5,10 @@ function render(location) {
   return new Promise(function(resolve, reject) {
     var file = table.l2f(location);
 
-    renderFile(file, {}, function(err, rendered) {
+    var opts = {};
+    opts.__layout = {};
+
+    renderFile(file, opts, function(err, rendered) {
       if (err) return reject(err);
 
       var clone = file.clone();
@@ -30,8 +33,6 @@ function renderFile(file, opts, cb) {
     var layout = file.meta('frontmatter').layout;
 
     if (layout) {
-      opts.body = rendered;
-
       layout = '_layouts/' + layout;
 
       if (!path.extname(layout)) {
@@ -43,6 +44,13 @@ function renderFile(file, opts, cb) {
       if (!layoutFile) {
         return cb(new Error('Layout file not found: ' + layout));
       }
+
+      if (opts.__layout[layout]) {
+        return cb(new Error('Layout are circular referenced: ' + layout));
+      }
+
+      opts.__layout[layout] = true;
+      opts.body = rendered;
 
       return renderFile(layoutFile, opts, cb);
     }
