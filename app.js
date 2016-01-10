@@ -7,6 +7,8 @@ app.use(express.static('_site'));
 app.get('*', function(req, res, next) {
   var location = req.url.slice(1);
 
+  location = location || 'index.html';
+
   render(location)
     .then(function(file) {
       res.send(file.contents.toString('utf8'));
