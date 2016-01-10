@@ -40,7 +40,7 @@ function watch() {
       gulp.src(path)
         .pipe(stream())
         .pipe(gulp.dest('_site'))
-        .pipe(bs.stream({ once: true }));
+        .on('finish', bs.reload);
     });
 }
 
