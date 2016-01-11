@@ -4,6 +4,7 @@ var steps = [
   'type',    // asset, template or other
   'matter',  // parsing frontmatter
   'compile', // precompiling templates
+  'partial', // registering a partial
   'record',  // caching the input file
   'route',   // updating the routing table
 ];
