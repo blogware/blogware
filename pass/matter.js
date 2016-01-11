@@ -1,7 +1,7 @@
 var frontmatter = require('frontmatter');
 
 function pass(file) {
-  if (file.meta('type') !== 'template') {
+  if (file.meta('type') !== 'document') {
     return file;
   }
 

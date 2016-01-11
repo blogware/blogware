@@ -1,5 +1,5 @@
 function pass(file) {
-  if (file.meta('type' !== 'template')) {
+  if (file.meta('type' !== 'document')) {
     return file;
   }
 
@@ -7,9 +7,13 @@ function pass(file) {
     return file;
   }
 
-  return new Promise(function(resolve, reject) {
-    var engine = file.meta('engine');
+  var engine = file.meta('engine');
 
+  if (!engine.registerPartial) {
+    return file;
+  }
+
+  return new Promise(function(resolve, reject) {
     engine.registerPartial(file, function(err) {
       if (err) return reject(err);
 

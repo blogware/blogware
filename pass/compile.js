@@ -1,11 +1,15 @@
 function pass(file) {
-  if (file.meta('type') !== 'template') {
+  if (file.meta('type') !== 'document') {
+    return file;
+  }
+
+  var engine = file.meta('engine');
+
+  if (!engine.compile) {
     return file;
   }
 
   return new Promise(function(resolve, reject) {
-    var engine = file.meta('engine');
-
     engine.compile(file, function(err, file) {
       if (err) return reject(err);
 
