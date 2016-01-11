@@ -1,4 +1,5 @@
 var steps = [
+  'path',    // fixing base path of the input file
   'patch',   // monkey patching to add the meta method
   'engine',  // determing the file processor
   'type',    // asset, template or other
