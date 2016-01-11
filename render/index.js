@@ -1,11 +1,11 @@
 var table = require('../table');
 var asset = require('./asset');
-var template = require('./template');
+var document = require('./document');
 var other = require('./other');
 
 var renderers = {
   asset: asset,
-  template: template,
+  document: document,
   other: other
 }
 
