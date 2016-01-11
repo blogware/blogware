@@ -22,7 +22,7 @@ function locate(file) {
   var engine = file.meta('engine');
 
   if (engine) {
-    location = engine.route(relative);
+    location = engine.route(file);
   }
 
   return location;
