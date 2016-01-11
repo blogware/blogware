@@ -1,5 +1,6 @@
 var path = require('path');
 var table = require('../table');
+var plugin = require('../plugin');
 
 function render(location) {
   return new Promise(function(resolve, reject) {
@@ -36,7 +37,13 @@ function renderFile(file, opts, cb) {
       layout = '_layouts/' + layout;
 
       if (!path.extname(layout)) {
-        layout = layout + engine.extnames[0];
+        var _engine = engine;
+
+        if (_engine.type !== 'template engine') {
+          _engine = plugin.lookup('template engine', 'type');
+        }
+
+        layout = layout + _engine.extnames[0];
       }
 
       var layoutFile = table.record.r2f(layout);
