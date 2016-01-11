@@ -42,7 +42,7 @@ function renderFile(file, opts, cb) {
       var layoutFile = table.record.r2f(layout);
 
       if (!layoutFile) {
-        return cb(new Error('Layout file not found: ' + layout));
+        return cb(new Error('Layout not found: ' + layout));
       }
 
       if (opts.__layout[layout]) {

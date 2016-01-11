@@ -13,7 +13,7 @@ function render(location) {
   var file = table.l2f(location);
 
   if (!file) {
-    var err = new Error('Not Found');
+    var err = new Error('File not found: ' + location);
     err.status = 404;
     return Promise.reject(err);
   }

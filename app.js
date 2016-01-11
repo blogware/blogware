@@ -19,11 +19,10 @@ app.get('*', function(req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
-  if (err.status === 404) {
-    res.send('404 ' + err.message);
-  } else {
-    next(err);
-  }
+  var status = err.status || 500;
+  var message = '<body>' + err.message + '</body>';
+
+  res.status(status).send(message);
 });
 
 module.exports = app;
