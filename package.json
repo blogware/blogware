@@ -13,6 +13,7 @@
     "express": "^4.13.3",
     "frontmatter": "0.0.0",
     "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-util": "^3.0.7",
     "through2": "^2.0.0"
   }
 }
