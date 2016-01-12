@@ -9,6 +9,7 @@ var steps = [
   'partial', // registering a partial
   'record',  // caching the input file
   'route',   // updating the routing table
+  'collect'  // updating the collection table (posts, pages, etc.)
 ];
 
 function pass(file) {
