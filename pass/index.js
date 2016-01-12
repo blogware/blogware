@@ -9,6 +9,7 @@ var steps = [
   'compile',    // precompiling templates
   'partial',    // registering a partial
   'record',     // caching the input file
+  'date',       // setting the page date
   'route',      // updating the routing table
   'title',      // setting the page title
   'config',     // updating the config table
