@@ -11,21 +11,27 @@ function pass(file) {
 }
 
 function check(file) {
-  var type;
+  var relative = file.relative;
+
+  if (relative === '_config.yml') {
+    return 'config';
+  }
 
   var engine = file.meta('engine');
 
   if (!engine) {
-    type = 'asset';
-  } else if (engine.type === 'template engine') {
-    type = 'template';
-  } else if (engine.type === 'markup converter') {
-    type = 'markup';
-  } else {
-    type = 'other';
+    return 'asset';
   }
 
-  return type;
+  if (engine.type === 'template engine') {
+    return 'template';
+  }
+
+  if (engine.type === 'markup converter') {
+    return 'markup';
+  }
+
+  return 'other';
 }
 
 module.exports = pass;
