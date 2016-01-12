@@ -9,6 +9,7 @@ var steps = [
   'partial', // registering a partial
   'record',  // caching the input file
   'route',   // updating the routing table
+  'config',  // updating the config table
   'collect'  // updating the collection table (posts, pages, etc.)
 ];
 
