@@ -12,10 +12,10 @@ function pass(file) {
       if (err) return reject(err);
 
       if (matter) {
-        file.meta('frontmatter', matter.data);
+        file.meta('matter', matter.data);
         file.contents = new Buffer(matter.content);
       } else {
-        file.meta('frontmatter', {});
+        file.meta('matter', {});
       }
 
       resolve(file);

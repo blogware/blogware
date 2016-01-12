@@ -31,7 +31,7 @@ function renderFile(file, opts, cb) {
   engine.render(file, opts, function(err, rendered) {
     if (err) return cb(err);
 
-    var layout = file.meta('frontmatter').layout;
+    var layout = file.meta('matter').layout;
 
     if (layout) {
       layout = '_layouts/' + layout;
