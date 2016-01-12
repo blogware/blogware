@@ -10,7 +10,7 @@ var renderers = {
 }
 
 function render(location) {
-  var file = table.l2f(location);
+  var file = getFile(location);
 
   if (!file) {
     var err = new Error('File not found: ' + location);
@@ -21,11 +21,29 @@ function render(location) {
   var renderer = renderers[file.meta('type')];
 
   if (renderer) {
-    return renderer(location);
+    return renderer(location, file);
   } else {
     var err = new Error('Unknown type: ' + relative);
     return Promise.reject(err);
   }
+}
+
+function getFile(location) {
+  var file;
+
+  file = table.l2f(location);
+
+  if (!file) {
+    if (location.slice(-1) === '/') {
+      location = location + 'index.html';
+    } else {
+      location = location + '/index.html';
+    }
+
+    file = table.l2f(location);
+  }
+
+  return file;
 }
 
 module.exports = render;

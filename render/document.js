@@ -2,10 +2,8 @@ var path = require('path');
 var table = require('../table');
 var plugin = require('../plugin');
 
-function render(location) {
+function render(location, file) {
   return new Promise(function(resolve, reject) {
-    var file = table.l2f(location);
-
     var opts = prepareOptions(file);
 
     renderFile(file, opts, function(err, rendered) {

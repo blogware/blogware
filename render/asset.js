@@ -1,8 +1,6 @@
 var path = require('path');
-var table = require('../table');
 
-function render(location) {
-  var file = table.l2f(location);
+function render(location, file) {
   var clone = file.clone();
   clone.path = path.resolve(clone.base, location);
   file.contents = null;
