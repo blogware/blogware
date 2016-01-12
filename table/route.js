@@ -6,9 +6,14 @@ function add(relative, location) {
   store2[location] = relative;
 }
 
+function r2l(relative) {
+  return store1[relative];
+}
+
 function l2r(location) {
   return store2[location];
 }
 
 exports.add = add;
+exports.r2l = r2l;
 exports.l2r = l2r;

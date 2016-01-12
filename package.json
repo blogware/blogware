@@ -15,6 +15,7 @@
     "frontmatter": "0.0.1",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-util": "^3.0.7",
+    "lodash": "^3.10.1",
     "through2": "^2.0.0"
   }
 }
