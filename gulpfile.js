@@ -1,6 +1,6 @@
-var plugin = require('./plugin');
+var bootstrap = require('./bootstrap');
 
-plugin.register();
+bootstrap();
 
 var gulp = require('gulp');
 var del = require('del');
