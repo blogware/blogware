@@ -6,8 +6,7 @@ function render(location) {
   return new Promise(function(resolve, reject) {
     var file = table.l2f(location);
 
-    var opts = {};
-    opts.__layout = {};
+    var opts = prepareOptions(file);
 
     renderFile(file, opts, function(err, rendered) {
       if (err) return reject(err);
@@ -19,6 +18,19 @@ function render(location) {
       resolve(clone);
     });
   });
+}
+
+function prepareOptions(file) {
+  var opts = {};
+  var config = table.config.get();
+
+  opts.data = {};
+  opts.data.blogware = config.blogware;
+  opts.data.site = config.site;
+  opts.data.page = file.meta('matter');
+  opts.__layout = {};
+
+  return opts;
 }
 
 function renderFile(file, opts, cb) {
