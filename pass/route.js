@@ -1,3 +1,4 @@
+var path = require('path');
 var moment = require('moment');
 var table = require('../table');
 
@@ -41,6 +42,26 @@ function locate(file) {
   if (engine) {
     location = engine.rename(relative);
   }
+
+  location = permalink(location);
+
+  return location;
+}
+
+function permalink(location) {
+  var extname = path.extname(location);
+  var basename = path.basename(location, extname);
+  var dirname = path.dirname(location);
+
+  if (extname !== '.html') {
+    return location;
+  }
+
+  if (basename === 'index') {
+    return location;
+  }
+
+  location = path.join(dirname, basename, 'index.html');
 
   return location;
 }
