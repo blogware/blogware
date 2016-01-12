@@ -22,6 +22,7 @@ app.use(function(err, req, res, next) {
   var status = err.status || 500;
   var message = '<body>' + err.message + '</body>';
 
+  console.log(err.stack);
   res.status(status).send(message);
 });
 
