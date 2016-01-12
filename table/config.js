@@ -8,9 +8,9 @@ function add(group, name, value) {
   store[group][name] = value;
 }
 
-function get() {
+function all() {
   return store;
 }
 
 exports.add = add;
-exports.get = get;
+exports.all = all;

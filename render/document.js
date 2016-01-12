@@ -22,7 +22,7 @@ function render(location) {
 
 function prepareOptions(file) {
   var opts = {};
-  var config = table.config.get();
+  var config = table.config.all();
 
   opts.data = {};
   opts.data.blogware = config.blogware;
