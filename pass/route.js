@@ -1,17 +1,34 @@
+var moment = require('moment');
 var table = require('../table');
-var route = table.route
 
 function pass(file) {
-  var relative = file.relative;
   var location = locate(file);
 
-  route.add(relative, location);
+  table.route.add(file.relative, location);
 
   return file;
 }
 
 function locate(file) {
   var relative = file.relative;
+  var collection = file.meta('collection');
+
+  if (collection) {
+    relative = relative.replace('_' + collection + '/', '');
+  }
+
+  if (collection === 'posts') {
+    relative = relative.replace(/^\d{4}-\d{2}-\d{2}-/, '');
+
+    var date = new Date(file.meta('matter').date)
+
+    if (date) {
+      try {
+        date = new Date(date).toISOString();
+        relative = moment(date).format('YYYY/MM/DD/') + relative;
+      } catch(err) {}
+    }
+  }
 
   if (relative.indexOf('_') === 0) {
     return;
@@ -22,7 +39,7 @@ function locate(file) {
   var engine = file.meta('engine');
 
   if (engine) {
-    location = engine.route(file);
+    location = engine.rename(relative);
   }
 
   return location;
