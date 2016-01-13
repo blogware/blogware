@@ -2,6 +2,8 @@ var frontmatter = require('frontmatter');
 var table = require('../table');
 
 function pass(file) {
+  if (!file) return null;
+
   if (file.meta('type') !== 'config') {
     return file;
   }

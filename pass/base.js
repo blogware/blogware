@@ -1,4 +1,5 @@
 function pass(file) {
+  if (!file) return null;
 
   file.base = file.cwd;
 

@@ -1,4 +1,6 @@
 function pass(file) {
+  if (!file) return null;
+
   var type = check(file);
 
   if (type === 'template' || type === 'markup') {

@@ -1,6 +1,8 @@
 var table = require('../table');
 
 function pass(file) {
+  if (!file) return null;
+
   if (file.meta('type') !== 'document') {
     return file;
   }

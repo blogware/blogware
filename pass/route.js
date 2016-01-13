@@ -3,6 +3,8 @@ var moment = require('moment');
 var table = require('../table');
 
 function pass(file) {
+  if (!file) return null;
+
   var location = locate(file);
 
   table.route.add(file.relative, location);
