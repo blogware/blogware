@@ -21,10 +21,13 @@ function render(location, file) {
 function prepareOptions(file) {
   var opts = {};
   var config = table.config;
+  var collection = table.collection;
 
   opts.data = {};
   opts.data.blogware = config.get('blogware');
   opts.data.site = config.get('site');
+  opts.data.posts = collection.get('posts');
+  opts.data.pages = collection.get('pages');
   opts.data.page = file.meta('matter');
   opts.__layout = {};
 

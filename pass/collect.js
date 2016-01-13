@@ -11,7 +11,7 @@ function pass(file) {
     return file;
   }
 
-  table.collection.add(collection, file);
+  table.collection.add(collection, file.meta('matter'));
 
   return file;
 }
