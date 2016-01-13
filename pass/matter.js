@@ -14,6 +14,7 @@ function pass(file) {
       if (err) return reject(err);
 
       if (matter) {
+        file.meta('originalContents', contents);
         file.meta('matter', matter.data);
         file.contents = new Buffer(matter.content);
       } else {
