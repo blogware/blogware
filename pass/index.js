@@ -1,6 +1,7 @@
 var steps = [
   'base',    // fixing base path of the input file
   'patch',   // monkey patching to add the meta method
+  'event',   // setting the event type
   'filter',  // ignoring directories and unchanged files
   'engine',  // determing the file processor
   'type',    // asset, template or other

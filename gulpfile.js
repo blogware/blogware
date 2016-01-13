@@ -67,6 +67,7 @@ function handler(event, path) {
     src = gulp.src(path + '/**/*');
   }
 
+  // 'add' or 'change'
   src = src || gulp.src(path);
 
   var dest;
