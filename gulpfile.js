@@ -3,6 +3,7 @@ var bootstrap = require('./bootstrap');
 bootstrap();
 
 var resolve = require('path').resolve;
+var join = require('path').join;
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var through = require('through2');
@@ -77,7 +78,24 @@ function handler(event, path) {
 
   src
     .pipe(stream())
+    .pipe(remove())
     .pipe(dest);
+}
+
+function remove() {
+  return through.obj(function(file, _, cb) {
+    if (file.meta('event') !== 'unlink') {
+      return cb(null, file);
+    }
+
+    var path = join(file.cwd, '_site', file.relative);
+
+    del(path)
+      .then(function() {
+        cb(null, null);
+      })
+      .catch(cb);
+  });
 }
 
 gulp.task('serve', gulp.series(clean, traverse, live));
