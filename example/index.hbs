@@ -5,11 +5,15 @@ layout: default
 Posts:
 
 <ul>
-  <li><a href="/2016/01/12/welcome/">Welcome</a></li>
+  {{#each @posts}}
+    <li><a href="{{path}}">{{title}}</a></li>
+  {{/each}}
 </ul>
 
 Pages:
 
 <ul>
-  <li><a href="/about/">About</a></li>
+  {{#each @pages}}
+    <li><a href="{{path}}">{{title}}</a></li>
+  {{/each}}
 </ul>
