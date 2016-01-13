@@ -20,11 +20,11 @@ function render(location, file) {
 
 function prepareOptions(file) {
   var opts = {};
-  var config = table.config.all();
+  var config = table.config;
 
   opts.data = {};
-  opts.data.blogware = config.blogware;
-  opts.data.site = config.site;
+  opts.data.blogware = config.get('blogware');
+  opts.data.site = config.get('site');
   opts.data.page = file.meta('matter');
   opts.__layout = {};
 
