@@ -8,6 +8,14 @@ function pass(file) {
     return file;
   }
 
+  if (file.meta('event') !== 'unlink') {
+    return add(file);
+  } else {
+    return del(file);
+  }
+}
+
+function add(file) {
   return new Promise(function(resolve, reject) {
     var contents = file.contents.toString('utf8');
     contents = '---\n' + contents + '---\n';
@@ -26,7 +34,11 @@ function pass(file) {
       resolve(file);
     });
   });
+}
 
+function del(file) {
+  table.config.del('site');
+  return file;
 }
 
 function parse(contents, cb) {

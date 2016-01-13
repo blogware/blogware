@@ -3,6 +3,10 @@ var table = require('../table');
 function pass(file) {
   if (!file) return null;
 
+  if (file.meta('event') === 'unlink') {
+    return file;
+  }
+
   if (file.meta('type') !== 'document') {
     return file;
   }

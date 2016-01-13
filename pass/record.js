@@ -1,12 +1,15 @@
 var table = require('../table');
-var record = table.record;
 
 function pass(file) {
   if (!file) return null;
 
   var relative = file.relative;
 
-  record.add(relative, file);
+  if (file.meta('event') !== 'unlink') {
+    table.record.add(relative, file);
+  } else {
+    table.record.del(relative);
+  }
 
   return file;
 }

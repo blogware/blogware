@@ -9,6 +9,14 @@ function pass(file) {
     return file;
   }
 
+  if (file.meta('event') !== 'unlink') {
+    return add(file);
+  } else {
+    return del(file);
+  }
+}
+
+function add(file) {
   var engine = file.meta('engine');
 
   if (!engine.registerPartial) {
@@ -17,6 +25,22 @@ function pass(file) {
 
   return new Promise(function(resolve, reject) {
     engine.registerPartial(file, function(err) {
+      if (err) return reject(err);
+
+      resolve(file);
+    });
+  });
+}
+
+function del(file) {
+  var engine = file.meta('engine');
+
+  if (!engine.unregisterPartial) {
+    return file;
+  }
+
+  return new Promise(function(resolve, reject) {
+    engine.unregisterPartial(file, function(err) {
       if (err) return reject(err);
 
       resolve(file);

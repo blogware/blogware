@@ -13,7 +13,11 @@ function pass(file) {
     return file;
   }
 
-  table.collection.add(collection, file.meta('matter'));
+  if (file.meta('event') !== 'unlink') {
+    table.collection.add(collection, file.meta('matter'));
+  } else {
+    table.collection.del(collection, file.meta('matter'));
+  }
 
   return file;
 }

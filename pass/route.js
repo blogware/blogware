@@ -7,7 +7,11 @@ function pass(file) {
 
   var location = locate(file);
 
-  table.route.add(file.relative, location);
+  if (file.meta('event') !== 'unlink') {
+    table.route.add(file.relative, location);
+  } else {
+    table.route.del(file.relative);
+  }
 
   return file;
 }
