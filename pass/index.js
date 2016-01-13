@@ -12,6 +12,7 @@ var steps = [
   'date',    // setting the page date
   'route',   // updating the routing table
   'title',   // setting the page title
+  'path',    // setting the page path
   'config',  // updating the config table
   'collect'  // updating the collection table (posts, pages, etc.)
 ];
