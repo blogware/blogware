@@ -24,13 +24,12 @@ function live() {
 }
 
 function serve() {
-  app.listen(4000, function() {
-    bs.init({
-      notify: false,
-      plugins: ['bs-html-injector'],
-      proxy: 'localhost:4000',
-      ui: false
-    });
+  bs.init({
+    notify: false,
+    ui: false,
+    plugins: ['bs-html-injector'],
+    server: { baseDir: '_site' },
+    middleware: [app]
   });
 }
 
