@@ -18,10 +18,10 @@ function del(collection, data) {
   });
 }
 
-function get(collection) {
-  return store[collection];
+function all() {
+  return store;
 }
 
 exports.add = add;
 exports.del = del;
-exports.get = get;
+exports.all = all;

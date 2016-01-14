@@ -1,3 +1,4 @@
+var _ = require('lodash');
 var path = require('path');
 var table = require('../table');
 var plugin = require('../plugin');
@@ -20,14 +21,12 @@ function render(location, file) {
 
 function prepareOptions(file) {
   var opts = {};
-  var config = table.config;
-  var collection = table.collection;
+  var configs = table.config.all();
+  var collections = table.collection.all();
 
   opts.data = {};
-  opts.data.blogware = config.get('blogware');
-  opts.data.site = config.get('site');
-  opts.data.posts = collection.get('posts');
-  opts.data.pages = collection.get('pages');
+  _.merge(opts.data, configs);
+  _.merge(opts.data, collections);
   opts.data.page = file.meta('matter');
   opts.__layout = {};
 

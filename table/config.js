@@ -12,10 +12,10 @@ function del(group) {
   store[group] = {};
 }
 
-function get(group) {
-  return store[group];
+function all(group) {
+  return store;
 }
 
 exports.add = add;
 exports.del = del;
-exports.get = get;
+exports.all = all;
