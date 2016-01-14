@@ -75,7 +75,7 @@ function handler(event, path) {
   var dest;
 
   dest = gulp.dest('_site');
-  dest.on('finish', htmlInjector);
+  dest.on('finish', browserSync.reload);
 
   src
     .pipe(stream())
