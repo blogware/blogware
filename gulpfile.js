@@ -34,8 +34,8 @@ function serve() {
   browserSync.init({
     notify: false,
     ui: false,
-    server: { baseDir: '_site' },
-    middleware: [app]
+    server: '.',
+    middleware: app
   });
 }
 
