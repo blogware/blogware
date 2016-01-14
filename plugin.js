@@ -12,7 +12,8 @@ function register() {
 
   packages.forEach(function(package) {
     if (pattern.test(package)) {
-      registerPlugin(require(package));
+      var opts = {};
+      registerPlugin(require(package).create(opts));
     }
   });
 }
