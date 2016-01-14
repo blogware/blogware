@@ -1,2 +1,3 @@
 title: Your awesome title
+hostname: "http://yourdomain.com" # e.g. "http://yourdomain.com"
 basepath: "" # e.g. "/blog"
