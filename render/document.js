@@ -27,7 +27,7 @@ function prepareOptions(file) {
   opts.data = {};
   _.merge(opts.data, configs);
   _.merge(opts.data, collections);
-  opts.data.page = file.meta('matter');
+  opts.data.current = file.meta('matter');
   opts.__layout = {};
 
   return opts;
