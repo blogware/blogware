@@ -8,7 +8,8 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var through = require('through2');
 var del = require('del');
-var bs = require('browser-sync').create();
+var browserSync = require('browser-sync').create();
+var htmlInjector = require('bs-html-injector');
 var app = require('./app');
 var stream = require('./stream');
 var table = require('./table');
@@ -29,10 +30,10 @@ function live() {
 }
 
 function serve() {
-  bs.init({
+  browserSync.use(htmlInjector);
+  browserSync.init({
     notify: false,
     ui: false,
-    plugins: ['bs-html-injector'],
     server: { baseDir: '_site' },
     middleware: [app]
   });
@@ -74,7 +75,7 @@ function handler(event, path) {
   var dest;
 
   dest = gulp.dest('_site');
-  dest.on('finish', bs.reload);
+  dest.on('finish', htmlInjector);
 
   src
     .pipe(stream())
