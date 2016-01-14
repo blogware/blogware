@@ -1,4 +1,6 @@
+var _ = require('lodash');
 var packageJson = require('./package.json');
+var table = require('./table');
 
 var requires = [];
 var registry = {};
@@ -12,7 +14,10 @@ function register() {
 
   packages.forEach(function(package) {
     if (pattern.test(package)) {
-      var opts = {};
+      var opts = {
+        config: table.config.all(),
+        collection: table.collection.all()
+      };
       registerPlugin(require(package).create(opts));
     }
   });
