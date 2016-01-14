@@ -1,3 +1,4 @@
+var path = require('path');
 var express = require('express');
 var render = require('./render');
 var app = express();
@@ -8,6 +9,7 @@ app.get('*', function(req, res, next) {
   var location = req.url.slice(1);
 
   location = location || 'index.html';
+  res.type(path.extname(location) || '.html');
 
   render(location)
     .then(function(file) {
