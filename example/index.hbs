@@ -6,7 +6,7 @@ Posts:
 
 <ul>
   {{#each @posts}}
-    <li><a href="{{path}}">{{title}}</a></li>
+    <li><a href="{{fullpath path}}">{{title}}</a></li>
   {{/each}}
 </ul>
 
@@ -14,6 +14,6 @@ Pages:
 
 <ul>
   {{#each @pages}}
-    <li><a href="{{path}}">{{title}}</a></li>
+    <li><a href="{{fullpath path}}">{{title}}</a></li>
   {{/each}}
 </ul>
