@@ -5,9 +5,8 @@ var table = require('../table');
 function pass(file) {
   if (!file) return null;
 
-  var location = locate(file);
-
   if (file.meta('event') !== 'unlink') {
+    var location = locate(file);
     table.route.add(file.relative, location);
   } else {
     table.route.del(file.relative);
