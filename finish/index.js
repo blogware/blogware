@@ -1,21 +1,16 @@
-var table = require('../table');
-var render = require('../render');
+var steps = [
+  'generate' // generating files
+]
 
 function finish(stream, files) {
-  var push = stream.push.bind(stream);
+  var opts = {
+    stream: stream,
+    files: files
+  }
 
-  return files.reduce(function(promise, file) {
-    return promise.then(function() {
-      var relative = file.relative;
-      var location = table.route.r2l(relative);
-
-      if (!location) {
-        return Promise.resolve(push(file));
-      } else {
-        return render(location).then(push);
-      }
-    });
-  }, Promise.resolve());
+  return steps.reduce(function(promise, step) {
+    return promise.then(require('./' + step));
+  }, Promise.resolve(opts));
 }
 
 module.exports = finish;
