@@ -1,5 +1,6 @@
 var through = require('through2');
 var pass = require('./pass');
+var finish = require('./finish');
 
 function stream() {
   var marked = [];
@@ -20,11 +21,11 @@ function stream() {
   }
 
   function flush(cb) {
-    var self = this;
-    marked.forEach(function(file) {
-      self.push(file);
-    });
-    cb();
+    finish(this, marked)
+      .then(function() {
+        cb();
+      })
+      .catch(cb);
   }
 }
 
