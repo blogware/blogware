@@ -6,7 +6,7 @@ Posts:
 
 <ul>
   {{#each @posts}}
-    <li><a href="{{fullpath path}}">{{title}}</a></li>
+    <li><a href="{{fullpath path}}">{{title}}</a> ({{datetime date 'YYYY-MM-DD'}})</li>
   {{/each}}
 </ul>
 
