@@ -2,7 +2,9 @@ var through = require('through2');
 var pass = require('./pass');
 
 function stream() {
-  return through.obj(transform);
+  var marked = [];
+
+  return through.obj(transform, flush);
 
   function transform(file, _, cb) {
     var self = this;
@@ -10,11 +12,19 @@ function stream() {
       .then(function(file) {
         if (!file) return cb();
         if (file.meta('type') === 'asset') {
-          self.push(file);
+          marked.push(file);
         }
         cb();
       })
       .catch(cb);
+  }
+
+  function flush(cb) {
+    var self = this;
+    marked.forEach(function(file) {
+      self.push(file);
+    });
+    cb();
   }
 }
 
