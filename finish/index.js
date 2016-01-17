@@ -1,4 +1,5 @@
 var steps = [
+  'convert', // converting markup files
   'generate' // generating files
 ]
 

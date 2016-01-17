@@ -7,7 +7,7 @@ function finish(opts) {
 
   var push = stream.push.bind(stream);
 
-  var p =  files.reduce(function(promise, file) {
+  var promise =  files.reduce(function(promise, file) {
     return promise.then(function() {
       var relative = file.relative;
       var location = table.route.r2l(relative);
@@ -20,7 +20,7 @@ function finish(opts) {
     });
   }, Promise.resolve());
 
-  return p.then(function() { return opts; });
+  return promise.then(function() { return opts; });
 }
 
 module.exports = finish;
