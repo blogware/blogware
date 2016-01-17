@@ -7,20 +7,20 @@ function finish(opts) {
 
   var push = stream.push.bind(stream);
 
-  var promise =  files.reduce(function(promise, file) {
-    return promise.then(function() {
-      var relative = file.relative;
-      var location = table.route.r2l(relative);
+  var promises = files.map(function(file) {
+    var relative = file.relative;
+    var location = table.route.r2l(relative);
 
-      if (!location) {
-        return Promise.resolve(push(file));
-      } else {
-        return render(location).then(push);
-      }
-    });
-  }, Promise.resolve());
+    if (!location) {
+      return Promise.resolve(push(file));
+    } else {
+      return render(location).then(push);
+    }
+  });
 
-  return promise.then(function() { return opts; });
+  return Promise.all(promises).then(function() {
+    return opts;
+  });
 }
 
 module.exports = finish;
