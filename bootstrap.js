@@ -1,10 +1,16 @@
+var es6Promise = require('es6-promise');
 var packageJson = require('./package.json');
 var table = require('./table');
 var plugin = require('./plugin');
 
 function bootstrap() {
+  promisePolyfill();
   updateConfigs();
   registerPlugins();
+}
+
+function promisePolyfill() {
+  es6Promise.polyfill();
 }
 
 function updateConfigs() {

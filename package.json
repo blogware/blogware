@@ -12,6 +12,7 @@
     "browser-sync": "^2.11.0",
     "bs-html-injector": "^3.0.0",
     "del": "^2.2.0",
+    "es6-promise": "^3.0.2",
     "express": "^4.13.3",
     "frontmatter": "0.0.1",
     "gulp": "github:gulpjs/gulp#4.0",
