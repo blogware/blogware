@@ -23,8 +23,12 @@ function getPath(file) {
 
   var location = table.route.r2l(file.relative);
 
-  path = '/' + location;
-  path = path.replace(/index.html$/, '');
+  path = location;
+
+  if (path) {
+    path = '/' + path;
+    path = path.replace(/index.html$/, '');
+  }
 
   return path;
 }
