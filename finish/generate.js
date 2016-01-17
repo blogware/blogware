@@ -3,7 +3,8 @@ var render = require('../render');
 
 function finish(opts) {
   var stream = opts.stream;
-  var files = opts.files;
+  var files = opts.marked.generate || [];
+
   var push = stream.push.bind(stream);
 
   var p =  files.reduce(function(promise, file) {

@@ -2,11 +2,11 @@ var steps = [
   'generate' // generating files
 ]
 
-function finish(stream, files) {
+function finish(stream, marked) {
   var opts = {
     stream: stream,
-    files: files
-  }
+    marked: marked
+  };
 
   return steps.reduce(function(promise, step) {
     return promise.then(require('./' + step));
