@@ -17,7 +17,8 @@ var steps = [
   'config',   // updating the config table
   'collect',  // updating the collection table (posts, pages, etc.)
   'mark',     // reset file marks
-  'generate'  // add 'generate' mark
+  'convert',  // mark files to convert (markup files)
+  'generate'  // mark files to generate
 ];
 
 function pass(file) {
