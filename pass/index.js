@@ -16,9 +16,10 @@ var steps = [
   'path',     // setting the page path
   'config',   // updating the config table
   'collect',  // updating the collection table (posts, pages, etc.)
-  'mark',     // reset file marks
-  'convert',  // mark files to convert (markup files)
-  'generate'  // mark files to generate
+  'sitetime', // setting last update time of the site
+  'mark',     // reseting file marks
+  'convert',  // marking files to convert (markup files)
+  'generate'  // marking files to generate
 ];
 
 function pass(file) {
