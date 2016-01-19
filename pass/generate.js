@@ -1,8 +1,16 @@
+var table = require('../table');
+
 function pass(file) {
   if (!file) return null;
 
-  if (file.meta('type') === 'asset') {
-    mark(file);
+  if (process.env.NODE_ENV === 'development') {
+    if (file.meta('type') === 'asset') {
+      mark(file);
+    }
+  } else {
+    if (table.route.r2l(file.relative)) {
+      mark(file);
+    }
   }
 
   return file;

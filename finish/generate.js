@@ -1,3 +1,4 @@
+var gutil = require('gulp-util');
 var table = require('../table');
 var render = require('../render');
 
@@ -10,6 +11,10 @@ function finish(opts) {
   var promises = files.map(function(file) {
     var relative = file.relative;
     var location = table.route.r2l(relative);
+
+    if (process.env.NODE_ENV !== 'development') {
+      gutil.log('Generating', '\'' + gutil.colors.green(location) + '\'');
+    }
 
     if (!location) {
       return Promise.resolve(push(file));
