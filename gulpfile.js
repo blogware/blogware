@@ -10,6 +10,7 @@ var through = require('through2');
 var del = require('del');
 var browserSync = require('browser-sync').create();
 var htmlInjector = require('bs-html-injector');
+var modRewrite = require('connect-modrewrite');
 var app = require('./app');
 var stream = require('./stream');
 var table = require('./table');
@@ -30,12 +31,21 @@ function live() {
 }
 
 function serve() {
+  var config = table.config.all();
+  var site = config.site;
+
   browserSync.use(htmlInjector);
   browserSync.init({
     notify: false,
     ui: false,
     server: '.',
-    middleware: app
+    startPath: site.basepath + '/',
+    middleware: [
+      modRewrite([
+        '^' + site.basepath + '/(.*) /$1'
+      ]),
+      app
+    ]
   });
 }
 

@@ -21,12 +21,12 @@ function render(location, file) {
 
 function prepareOptions(file) {
   var opts = {};
-  var configs = table.config.all();
-  var collections = table.collection.all();
+  var config = table.config.all();
+  var collection = table.collection.all();
 
   opts.data = {};
-  _.merge(opts.data, configs);
-  _.merge(opts.data, collections);
+  _.merge(opts.data, config);
+  _.merge(opts.data, collection);
   opts.data.current = file.meta('matter');
   opts.__layout = {};
 

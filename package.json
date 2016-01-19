@@ -11,6 +11,7 @@
     "blogware-plugin-sass": "^0.0.1",
     "browser-sync": "^2.11.1",
     "bs-html-injector": "^3.0.0",
+    "connect-modrewrite": "^0.8.5",
     "del": "^2.2.0",
     "es6-promise": "^3.0.2",
     "express": "^4.13.3",
