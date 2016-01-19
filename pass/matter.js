@@ -5,7 +5,6 @@ function pass(file) {
 
   if (file.meta('event') === 'unlink') {
     file.meta('matter', {});
-    file.meta('matter').relative = file.relative;
     return file;
   }
 
@@ -16,14 +15,13 @@ function pass(file) {
   return new Promise(function(resolve, reject) {
     var contents = file.contents.toString('utf8');
 
-    parse(contents, function(err, matter) {
+    parse(contents, function(err, parsed) {
       if (err) return reject(err);
 
-      if (matter) {
+      if (parsed) {
         file.meta('originalContents', contents);
-        file.meta('matter', matter.data);
-        file.meta('matter').relative = file.relative;
-        file.contents = new Buffer(matter.content);
+        file.meta('matter', parsed.data);
+        file.contents = new Buffer(parsed.content);
       } else {
         file.meta('matter', {});
       }
@@ -34,15 +32,15 @@ function pass(file) {
 }
 
 function parse(contents, cb) {
-  var matter;
+  var parsed;
 
   try {
-    matter = frontmatter(contents);
+    parsed = frontmatter(contents);
   } catch(err) {
     return cb(err);
   }
 
-  cb(null, matter);
+  cb(null, parsed);
 }
 
 module.exports = pass;

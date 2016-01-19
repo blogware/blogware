@@ -14,9 +14,9 @@ function pass(file) {
   }
 
   if (file.meta('event') !== 'unlink') {
-    table.collection.add(collection, file.meta('matter'));
+    table.collection.add(collection, file.relative, file.meta('matter'));
   } else {
-    table.collection.del(collection, file.meta('matter'));
+    table.collection.del(collection, file.relative);
   }
 
   return file;
