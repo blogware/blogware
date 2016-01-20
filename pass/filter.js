@@ -31,8 +31,10 @@ function isUnchanged(file) {
 
   if (!cached) return false;
 
-  c1 = file.contents.toString('utf8');
-  c2 = (cached.meta('originalContents') || cached.contents).toString('utf8');
+  c1 = file.contents || '';
+  c1 = c1.toString('utf8');
+  c2 = (cached.meta('originalContents') || cached.contents) || '';
+  c2 = c2.toString('utf8');
 
   return c1 === c2;
 }
