@@ -25,12 +25,12 @@ function traverse() {
     .pipe(gulp.dest('_site'));
 }
 
-function dynamic() {
+function dynamics() {
   serve(app);
   watch();
 }
 
-function static() {
+function statics() {
   serve(function(req, res, next) {
     next();
   });
@@ -38,17 +38,17 @@ function static() {
 
 function serve(middleware) {
   var config = table.config.all();
-  var site = config.site;
+  var basepath = config.site.basepath || '';
 
   browserSync.use(htmlInjector);
   browserSync.init({
     notify: false,
     ui: false,
     server: '_site',
-    startPath: site.basepath + '/',
+    startPath: basepath + '/',
     middleware: [
       modRewrite([
-        '^' + site.basepath + '/(.*) /$1'
+        '^' + basepath + '/(.*) /$1'
       ]),
       middleware
     ]
@@ -120,5 +120,5 @@ function setenv(cb) {
   cb();
 }
 
-gulp.task('serve', gulp.series(clean, traverse, dynamic));
-gulp.task('preview', gulp.series(setenv, clean, traverse, static));
+gulp.task('serve', gulp.series(clean, traverse, dynamics));
+gulp.task('preview', gulp.series(setenv, clean, traverse, statics));
