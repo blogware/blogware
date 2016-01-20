@@ -11,6 +11,7 @@ var del = require('del');
 var browserSync = require('browser-sync').create();
 var htmlInjector = require('bs-html-injector');
 var modRewrite = require('connect-modrewrite');
+var ghPages = require('gulp-gh-pages');
 var app = require('./app');
 var stream = require('./stream');
 var table = require('./table');
@@ -120,5 +121,13 @@ function setenv(cb) {
   cb();
 }
 
+function gitpush() {
+  return gulp.src('_site/**/*')
+    .pipe(ghPages({
+      branch: 'master'
+    }));
+}
+
 gulp.task('serve', gulp.series(clean, traverse, dynamics));
 gulp.task('preview', gulp.series(setenv, clean, traverse, statics));
+gulp.task('publish', gulp.series(setenv, clean, traverse, gitpush));
