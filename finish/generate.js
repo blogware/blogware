@@ -10,16 +10,22 @@ function finish(opts) {
 
   var promises = files.map(function(file) {
     var relative = file.relative;
-    var location = table.route.r2l(relative);
+    var locations = table.route.r2ls(relative);
 
-    if (process.env.NODE_ENV !== 'development') {
-      gutil.log('Generating', '\'' + gutil.colors.green(location) + '\'');
-    }
-
-    if (!location) {
+    if (!locations) {  // deleted files
       return Promise.resolve(push(file));
     } else {
-      return render(location).then(push);
+      return locations.reduce(function(promise, location) {
+        return promise
+          .then(function() {
+            if (process.env.NODE_ENV !== 'development') {
+              gutil.log('Generating', '\'' + gutil.colors.green(location) + '\'');
+            }
+
+            return render(location);
+          })
+          .then(push);
+      }, Promise.resolve());
     }
   });
 
