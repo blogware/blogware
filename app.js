@@ -22,7 +22,11 @@ app.get('*', function(req, res, next) {
 
 app.use(function(err, req, res, next) {
   var status = err.status || 500;
-  var message = '<body>' + err.message + '</body>';
+  var message = '<!DOCTYPE html>'
+    + '<html lang="en">'
+    + '<head><meta charset="utf-8"></head>'
+    + '<body>' + err.message + '</body>'
+    + '</html>';
 
   console.log(err.stack);
   res.status(status).send(message);
