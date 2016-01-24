@@ -10,7 +10,7 @@ function finish(opts) {
 
   var promises = files.map(function(file) {
     var relative = file.relative;
-    var locations = table.route.r2ls(relative);
+    var locations = table.route.r2l(relative);
 
     if (!locations) {  // deleted files
       return Promise.resolve(push(file));

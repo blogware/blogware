@@ -13,6 +13,10 @@ function pass(file) {
     return file;
   }
 
+  if (!table.route.r2l(file.relative)) {
+    return file;
+  }
+
   var title = getTitle(file);
 
   file.meta('matter').title = title;
@@ -27,7 +31,7 @@ function getTitle(file) {
     return title;
   }
 
-  var location = table.route.r2l(file.relative);
+  var location = table.route.r2l(file.relative)[0];
   var basename = path.basename(location);
 
   if (basename === 'index.html') {

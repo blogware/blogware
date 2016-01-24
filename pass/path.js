@@ -11,6 +11,10 @@ function pass(file) {
     return file;
   }
 
+  if (!table.route.r2l(file.relative)) {
+    return file;
+  }
+
   var path = getPath(file);
 
   file.meta('matter').path = path;
@@ -21,7 +25,7 @@ function pass(file) {
 function getPath(file) {
   var path;
 
-  var location = table.route.r2l(file.relative);
+  var location = table.route.r2l(file.relative)[0];
 
   path = location;
 

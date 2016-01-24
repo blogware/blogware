@@ -8,7 +8,7 @@ function pass(file) {
       mark(file);
     }
   } else {
-    if (table.route.r2ls(file.relative)) {
+    if (table.route.r2l(file.relative)) {
       mark(file);
     }
   }
