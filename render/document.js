@@ -5,7 +5,7 @@ var plugin = require('../plugin');
 
 function render(location, file) {
   return new Promise(function(resolve, reject) {
-    var opts = prepareOptions(file);
+    var opts = prepareOptions(location, file);
 
     renderFile(file, opts, function(err, rendered) {
       if (err) return reject(err);
@@ -19,7 +19,7 @@ function render(location, file) {
   });
 }
 
-function prepareOptions(file) {
+function prepareOptions(location, file) {
   var opts = {};
   var config = table.config.all();
   var collection = table.collection.all();
@@ -30,7 +30,57 @@ function prepareOptions(file) {
   opts.data.current = file.meta('matter');
   opts.__layout = {};
 
+  opts.data.paginator = preparePaginator(opts, location);
+
   return opts;
+}
+
+function preparePaginator(opts, location) {
+  var perpage = Math.floor(opts.data.current.perpage);
+  var length = (opts.data.posts || []).length;
+
+  if (!perpage) {
+    return {
+      perpage: perpage,
+      length: length,
+      start: 0,
+      end: length - 1,
+      current: 1,
+      total: 1,
+      previous: null,
+      next: null
+    };
+  }
+
+  var total = Math.ceil(length / perpage);
+
+  var current;
+  var pattern = /\/page\/(\d+)\//;
+  var matches = location.match(pattern);
+
+  if (matches) {
+    current = Number(matches[1]);
+  }
+
+  current = current || 1;
+
+  var previous = current > 1 ? current - 1 : null;
+  var next = perpage * current < length ? current + 1 : null;
+  var start = perpage * (current - 1);
+  var end = Math.min(perpage * current - 1, length - 1);
+
+  var paginator = {
+    perpage: perpage,
+    length: length,
+    start: start,
+    end: end,
+    current: current,
+    total: total,
+    previous: previous,
+    next: next
+  }
+
+  return paginator;
 }
 
 function renderFile(file, opts, cb) {
