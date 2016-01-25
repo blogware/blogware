@@ -3,20 +3,34 @@ var _ = require('lodash');
 var store1 = {}; // relative -> locations
 var store2 = {}; // location -> relative
 
-function add(relative, location) {
-  if (location == null) return;
-  store1[relative] = _.union(store1[relative], [location]);
-  store2[location] = relative;
+function add(relative, locations) {
+  if (!_.isArray(locations)) return;
+
+  locations = _.uniq(_.compact(locations));
+
+  if (locations.length === 0) return;
+
+  var before = store1[relative];
+
+  store1[relative] = locations;
+
+  _.difference(locations, before).forEach(function(location) {
+    store2[location] = relative;
+  });
+
+  _.difference(before, locations).forEach(function(location) {
+    delete store2[location];
+  });
 }
 
 function del(relative) {
-  var before = store1[relative] || [];
+  var locations = store1[relative] || [];
+
+  locations.forEach(function(location) {
+    delete store2[location];
+  });
 
   delete store1[relative];
-
-  before.forEach(function(key) {
-    delete store2[key];
-  });
 }
 
 function r2l(relative) {

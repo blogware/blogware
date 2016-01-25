@@ -36,10 +36,7 @@ function update(file) {
     locations.push(l);
   }
 
-  table.route.del(file.relative);
-  locations.forEach(function(l) {
-    table.route.add(file.relative, l);
-  });
+  table.route.add(file.relative, locations);
 }
 
 module.exports = finish;
