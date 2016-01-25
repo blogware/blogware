@@ -1,6 +1,7 @@
 var steps = [
-  'convert', // converting markup files
-  'generate' // generating files
+  'convert',  // converting markup files
+  'paginate', // adding paginated route entries
+  'generate'  // generating files
 ]
 
 function finish(stream, marked) {

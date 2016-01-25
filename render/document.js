@@ -43,7 +43,7 @@ function preparePaginator(opts, location) {
     return {
       perpage: perpage,
       length: length,
-      start: 0,
+      begin: 0,
       end: length - 1,
       current: 1,
       total: 1,
@@ -55,7 +55,7 @@ function preparePaginator(opts, location) {
   var total = Math.ceil(length / perpage);
 
   var current;
-  var pattern = /\/page\/(\d+)\//;
+  var pattern = /\bpage\/(\d+)\b/;
   var matches = location.match(pattern);
 
   if (matches) {
@@ -66,13 +66,13 @@ function preparePaginator(opts, location) {
 
   var previous = current > 1 ? current - 1 : null;
   var next = perpage * current < length ? current + 1 : null;
-  var start = perpage * (current - 1);
+  var begin = perpage * (current - 1);
   var end = Math.min(perpage * current - 1, length - 1);
 
   var paginator = {
     perpage: perpage,
     length: length,
-    start: start,
+    begin: begin,
     end: end,
     current: current,
     total: total,

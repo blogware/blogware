@@ -18,7 +18,8 @@ var steps = [
   'collect',  // updating the collection table (posts, pages, etc.)
   'sitetime', // setting last update time of the site
   'mark',     // reseting file marks
-  'convert',  // marking files to convert (markup files)
+  'convert',  // marking files to convert (e.g. markup files)
+  'paginate', // marking files to paginate
   'generate'  // marking files to generate
 ];
 
