@@ -30,57 +30,78 @@ function prepareOptions(location, file) {
   opts.data.current = file.meta('matter');
   opts.__layout = {};
 
-  opts.data.paginator = preparePaginator(opts, location);
+  opts.data.paginator = preparePaginator(opts, location, file);
 
   return opts;
 }
 
-function preparePaginator(opts, location) {
+function preparePaginator(opts, location, file) {
   var perpage = Math.floor(opts.data.current.perpage);
-  var length = (opts.data.posts || []).length;
+  var total = (opts.data.posts || []).length;
 
   if (!perpage) {
     return {
       perpage: perpage,
-      length: length,
+      total: total,
       begin: 0,
-      end: length - 1,
-      current: 1,
-      total: 1,
-      previous: null,
+      end: total - 1,
+      page: 1,
+      pages: 1,
+      prev: null,
       next: null
     };
   }
 
-  var total = Math.ceil(length / perpage);
+  var pages = Math.ceil(total / perpage);
 
-  var current;
+  var page;
   var pattern = /\bpage\/(\d+)\b/;
   var matches = location.match(pattern);
 
   if (matches) {
-    current = Number(matches[1]);
+    page = Number(matches[1]);
   }
 
-  current = current || 1;
+  page = page || 1;
 
-  var previous = current > 1 ? current - 1 : null;
-  var next = perpage * current < length ? current + 1 : null;
-  var begin = perpage * (current - 1);
-  var end = Math.min(perpage * current - 1, length - 1);
+  var begin = perpage * (page - 1);
+  var end = Math.min(perpage * page - 1, total - 1);
+
+  // var prevNumber = page > 1 ? page - 1 : null;
+  // var nextNumber = perpage * page < total ? page + 1 : null;
+
+  var relative = file.relative;
+  var locations = table.route.r2l(relative);
+  var index = locations.indexOf(location);
+
+  var prev = l2p(locations[index - 1]);
+  var next = l2p(locations[index + 1]);
 
   var paginator = {
     perpage: perpage,
-    length: length,
+    total: total,
     begin: begin,
     end: end,
-    current: current,
-    total: total,
-    previous: previous,
+    page: page,
+    pages: pages,
+    prev: prev,
     next: next
   }
 
+  console.log(paginator);
+
   return paginator;
+}
+
+function l2p(location) {
+  if (!location) return null;
+
+  var path2 = location;
+
+  path2 = '/' + path2;
+  path2 = path2.replace(/index.html$/, '');
+
+  return path2;
 }
 
 function renderFile(file, opts, cb) {

@@ -10,7 +10,9 @@ var renderers = {
 }
 
 function render(location) {
-  var file = getFile(location);
+  location = fixLocation(location);
+
+  var file = table.l2f(location);
 
   if (!file) {
     var err = new Error('File not found: ' + location);
@@ -28,22 +30,21 @@ function render(location) {
   }
 }
 
-function getFile(location) {
-  var file;
+function fixLocation(location) {
+  var location2 = location;
 
-  file = table.l2f(location);
-
-  if (!file) {
-    if (location.slice(-1) === '/') {
-      location = location + 'index.html';
-    } else {
-      location = location + '/index.html';
-    }
-
-    file = table.l2f(location);
+  if (table.l2f(location2)) {
+    return location2;
   }
 
-  return file;
+  if (location2.slice(-1) === '/') {
+    location2 += 'index.html';
+  } else {
+    location2 += '/index.html';
+  }
+
+  return location2;
 }
+
 
 module.exports = render;
