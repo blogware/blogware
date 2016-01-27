@@ -5,7 +5,14 @@ var finish = require('./finish');
 function stream() {
   var marked = {};
 
-  return through.obj(transform, flush);
+  var _stream = through.obj(transform, flush);
+
+  _stream.on('error', function(err) {
+    console.log(err.stack);
+    _stream.end();
+  });
+
+  return _stream;
 
   function transform(file, _, cb) {
     var self = this;
@@ -21,7 +28,10 @@ function stream() {
 
         cb();
       })
-      .catch(cb);
+      .catch(function(err) {
+        console.log(err.stack);
+        cb();
+      });
   }
 
   function flush(cb) {
@@ -29,7 +39,10 @@ function stream() {
       .then(function() {
         cb();
       })
-      .catch(cb);
+      .catch(function(err) {
+        console.log(err.stack);
+        cb();
+      });
   }
 }
 

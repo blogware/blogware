@@ -88,8 +88,6 @@ function preparePaginator(opts, location, file) {
     next: next
   }
 
-  console.log(paginator);
-
   return paginator;
 }
 
