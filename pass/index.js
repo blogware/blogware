@@ -12,6 +12,7 @@ var steps = [
   'record',   // caching the input file
   'date',     // setting the page date
   'route',    // updating the routing table
+  'tag',      // updating the tag table
   'title',    // setting the page title
   'path',     // setting the page path
   'config',   // updating the config table
