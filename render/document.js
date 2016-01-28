@@ -32,6 +32,14 @@ function prepareOptions(location, file) {
 
   opts.data.paginator = preparePaginator(opts, location, file);
 
+  if (location === 'index.html') {
+    opts.data.home = true;
+  }
+
+  if (opts.data.paginator.page > 1) {
+    opts.data.paged = true;
+  }
+
   return opts;
 }
 
