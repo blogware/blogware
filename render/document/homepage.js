@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var path = require('path');
-var table = require('../table');
-var plugin = require('../plugin');
+var table = require('../../table');
+var plugin = require('../../plugin');
 
 function render(location, file) {
   return new Promise(function(resolve, reject) {
