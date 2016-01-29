@@ -45,5 +45,10 @@ function delVal(store, key, value) {
   }
 }
 
+function all() {
+  return store2;
+}
+
 exports.add = add;
 exports.del = del;
+exports.all = all;
