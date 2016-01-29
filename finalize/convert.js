@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var table = require('../table');
 
-function finish(opts) {
+function finalize(opts) {
   var files = opts.marked.convert || [];
 
   var promises = files.map(function(file) {
@@ -32,4 +32,4 @@ function renderFile(file) {
   });
 }
 
-module.exports = finish;
+module.exports = finalize;

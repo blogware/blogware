@@ -1,6 +1,6 @@
 var table = require('../table');
 
-function finish(opts) {
+function finalize(opts) {
   var file = table.l2f('index.html');
 
   if (!file) {
@@ -44,4 +44,4 @@ function finish(opts) {
   return opts;
 }
 
-module.exports = finish;
+module.exports = finalize;

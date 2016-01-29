@@ -1,6 +1,6 @@
 var through = require('through2');
 var pass = require('./pass');
-var finish = require('./finish');
+var finalize = require('./finalize');
 
 function stream() {
   var marked = {};
@@ -35,7 +35,7 @@ function stream() {
   }
 
   function flush(cb) {
-    finish(this, marked)
+    finalize(this, marked)
       .then(function() {
         cb();
       })

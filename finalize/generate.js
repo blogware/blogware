@@ -2,7 +2,7 @@ var gutil = require('gulp-util');
 var table = require('../table');
 var render = require('../render');
 
-function finish(opts) {
+function finalize(opts) {
   var stream = opts.stream;
   var files = opts.marked.generate || [];
 
@@ -34,4 +34,4 @@ function finish(opts) {
   });
 }
 
-module.exports = finish;
+module.exports = finalize;

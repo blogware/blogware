@@ -4,7 +4,7 @@ var steps = [
   'generate'  // generating files
 ]
 
-function finish(stream, marked) {
+function finalize(stream, marked) {
   var opts = {
     stream: stream,
     marked: marked
@@ -15,4 +15,4 @@ function finish(stream, marked) {
   }, Promise.resolve(opts));
 }
 
-module.exports = finish;
+module.exports = finalize;
