@@ -1,6 +1,6 @@
 var steps = [
   'convert',  // converting markup files
-  'paginate', // adding paginated route entries
+  'homepage', // paginating the homepage
   'generate'  // generating files
 ]
 

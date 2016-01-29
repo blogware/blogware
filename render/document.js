@@ -60,7 +60,7 @@ function preparePaginator(opts, location, file) {
     };
   }
 
-  var pages = Math.ceil(total / perpage);
+  var pages = Math.ceil(total / perpage) || 1;
 
   var page;
   var pattern = /\bpage\/(\d+)\b/;
