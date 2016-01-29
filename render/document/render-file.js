@@ -3,6 +3,8 @@ var table = require('../../table');
 var plugin = require('../../plugin');
 
 function renderFile(file, opts, cb) {
+  opts.__layout = opts.__layout || {};
+
   var engine = file.meta('engine');
 
   if (!engine) {

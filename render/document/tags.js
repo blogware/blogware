@@ -28,13 +28,8 @@ function prepareOptions(location, file) {
   _.merge(opts.data, config);
   _.merge(opts.data, collection);
   opts.data.current = file.meta('matter');
-  opts.__layout = {};
 
   opts.data.paginator = preparePaginator(opts, location, file);
-
-  if (location === 'index.html') {
-    opts.data.home = true;
-  }
 
   if (opts.data.paginator.page > 1) {
     opts.data.paged = true;
