@@ -7,7 +7,7 @@ function finish(opts) {
     return opts;
   }
 
-  var modified = opts.marked.homepage || [];
+  var modified = opts.marked.posts || [];
 
   if (modified.length === 0) {
     return opts;

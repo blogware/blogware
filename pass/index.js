@@ -20,7 +20,7 @@ var steps = [
   'sitetime', // setting last update time of the site
   'mark',     // reseting file marks
   'convert',  // marking files to convert (e.g. markup files)
-  'homepage', // marking modified posts for paginating the homepage
+  'post',     // marking modified posts for paginating
   'generate'  // marking files to generate
 ];
 

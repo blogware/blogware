@@ -13,7 +13,7 @@ function pass(file) {
 }
 
 function mark(file) {
-  file.meta('mark').push('homepage');
+  file.meta('mark').push('posts');
 }
 
 module.exports = pass;
