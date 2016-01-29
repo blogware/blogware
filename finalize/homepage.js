@@ -1,7 +1,9 @@
 var table = require('../table');
 
+var relative = 'index.hbs';
+
 function finalize(opts) {
-  var file = table.l2f('index.html');
+  var file = table.record.r2f(relative);
 
   if (!file) {
     return opts;
@@ -13,33 +15,26 @@ function finalize(opts) {
     return opts;
   }
 
-  var perpage = file.meta('matter').perpage || table.config.all().site.perpage;
+  var perpage = file.meta('matter').perpage;
 
   if (!perpage) {
     return opts;
   }
 
+  // Paginate homepage
+
   var total = (table.collection.all().posts || []).length;
   var pages = Math.ceil(total / perpage) || 1;
 
   var locations = [];
-  var first = table.route.r2l(file.relative)[0];
 
-  locations.push(first);
-
-  var location = first;
-
-  location = location.charAt(0) === '/' ? location : '/' + location;
-
-  var index = location.lastIndexOf('/');
+  locations.push('index.html');
 
   for (var i = 2; i <= pages; i++) {
-    var l = location.slice(0, index) + '/page/' + i + location.slice(index)
-    if (location.indexOf('/') === 0) l = l.slice(1);
-    locations.push(l);
+    locations.push('page/' + i + '/index.html');
   }
 
-  table.route.add(file.relative, locations);
+  table.route.add(relative, locations);
 
   return opts;
 }

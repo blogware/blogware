@@ -15,11 +15,13 @@ function finalize(opts) {
     return opts;
   }
 
-  var perpage = file.meta('matter').perpage || table.config.all().site.perpage;
+  var perpage = file.meta('matter').perpage;
 
   if (!perpage) {
     return opts;
   }
+
+  // Paginate tag pages
 
   var tags = table.tag.all();
   var locations = [];
@@ -27,9 +29,8 @@ function finalize(opts) {
   Object.keys(tags).forEach(function(tag) {
     var total = (tags[tag] || []).length;
     var pages = Math.ceil(total / perpage) || 1;
-    var first = 'tag/' + tag + '/index.html';
 
-    locations.push(first);
+    locations.push('tag/' + tag + '/index.html');
 
     for (var i = 2; i <= pages; i++) {
       locations.push('tag/' + tag + '/page/' + i + '/index.html');
