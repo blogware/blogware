@@ -23,12 +23,10 @@ function add(file) {
     parse(contents, function(err, matter) {
       if (err) return reject(err);
 
-      if (matter) {
-        var data = matter.data;
+      var data = matter.data;
 
-        for (var name in data) {
-          table.config.add('site', name, data[name]);
-        }
+      for (var name in data) {
+        table.config.add('site', name, data[name]);
       }
 
       resolve(file);

@@ -18,13 +18,9 @@ function pass(file) {
     parse(contents, function(err, parsed) {
       if (err) return reject(err);
 
-      if (parsed) {
-        file.meta('originalContents', contents);
-        file.meta('matter', parsed.data);
-        file.contents = new Buffer(parsed.content);
-      } else {
-        file.meta('matter', {});
-      }
+      file.meta('originalContents', contents);
+      file.meta('matter', parsed.data || {});
+      file.contents = new Buffer(parsed.content);
 
       resolve(file);
     });

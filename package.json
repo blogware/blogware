@@ -18,7 +18,7 @@
     "del": "^2.2.0",
     "es6-promise": "^3.0.2",
     "express": "^4.13.3",
-    "frontmatter": "0.0.1",
+    "frontmatter": "0.0.2",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-gh-pages": "^0.5.4",
     "gulp-util": "^3.0.7",
