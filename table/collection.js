@@ -38,10 +38,15 @@ function update(collection) {
   });
 }
 
+function get(collection, relative) {
+  return store1[collection][relative];
+}
+
 function all() {
   return store2;
 }
 
 exports.add = add;
 exports.del = del;
+exports.get = get;
 exports.all = all;

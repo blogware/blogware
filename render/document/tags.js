@@ -29,6 +29,17 @@ function prepareOptions(location, file) {
   _.merge(opts.data, collection);
   opts.data.current = file.meta('matter');
 
+  var tag = getTag(location);
+  var relatives = table.tag.all()[tag] || [];
+
+  var posts = relatives.map(function(relative) {
+    return table.collection.get('posts', relative);
+  }).sort(function(a, b) {
+    return b.date > a.date;
+  });
+
+  opts.data.posts = posts;
+
   opts.data.paginator = preparePaginator(opts, location, file);
 
   if (opts.data.paginator.page > 1) {
@@ -36,6 +47,18 @@ function prepareOptions(location, file) {
   }
 
   return opts;
+}
+
+function getTag(location) {
+  var tag;
+  var pattern = /^tag\/([^\/]+)\//;
+  var matches = location.match(pattern);
+
+  if (matches) {
+    tag = matches[1];
+  }
+
+  return tag;
 }
 
 function preparePaginator(opts, location, file) {

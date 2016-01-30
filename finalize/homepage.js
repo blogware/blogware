@@ -15,23 +15,22 @@ function finalize(opts) {
     return opts;
   }
 
-  var perpage = file.meta('matter').perpage;
-
-  if (!perpage) {
-    return opts;
-  }
-
   // Paginate homepage
 
+  var perpage = Number(file.meta('matter').perpage);
   var total = (table.collection.all().posts || []).length;
-  var pages = Math.ceil(total / perpage) || 1;
-
   var locations = [];
+
+  perpage = perpage || total;
 
   locations.push('index.html');
 
-  for (var i = 2; i <= pages; i++) {
-    locations.push('page/' + i + '/index.html');
+  if (perpage) {
+    var pages = Math.ceil(total / perpage) || 1;
+
+    for (var i = 2; i <= pages; i++) {
+      locations.push('page/' + i + '/index.html');
+    }
   }
 
   table.route.add(relative, locations);

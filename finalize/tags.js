@@ -15,25 +15,25 @@ function finalize(opts) {
     return opts;
   }
 
-  var perpage = file.meta('matter').perpage;
-
-  if (!perpage) {
-    return opts;
-  }
-
   // Paginate tag pages
 
+  var perpage = Number(file.meta('matter').perpage);
   var tags = table.tag.all();
   var locations = [];
 
   Object.keys(tags).forEach(function(tag) {
     var total = (tags[tag] || []).length;
-    var pages = Math.ceil(total / perpage) || 1;
 
-    locations.push('tag/' + tag + '/index.html');
+    perpage = perpage || total;
 
-    for (var i = 2; i <= pages; i++) {
-      locations.push('tag/' + tag + '/page/' + i + '/index.html');
+    if (perpage) {
+      var pages = Math.ceil(total / perpage) || 1;
+
+      locations.push('tag/' + tag + '/index.html');
+
+      for (var i = 2; i <= pages; i++) {
+        locations.push('tag/' + tag + '/page/' + i + '/index.html');
+      }
     }
   });
 

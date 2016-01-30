@@ -10,6 +10,10 @@ function add(relative, tags) {
 
   store1[relative] = tags;
 
+  if (store1[relative].length === 0) {
+    delete store1[relative];
+  }
+
   _.difference(tags, before).forEach(function(key) {
     addVal(store2, key, relative);
   });
