@@ -10,12 +10,19 @@ var renderers = {
 }
 
 function render(location) {
-  location = fixLocation(location);
-
+  var _location = location;
   var file = table.l2f(location);
 
   if (!file) {
-    var err = new Error('File not found: ' + location);
+    location += '/index.html';
+    location = location.replace('//', '/');
+  }
+
+  file = table.l2f(location);
+
+  if (!file) {
+    _location = _location.replace(/\/$/, '/index.html');
+    var err = new Error('File not found: ' + _location);
     err.status = 404;
     return Promise.reject(err);
   }
@@ -29,22 +36,5 @@ function render(location) {
     return Promise.reject(err);
   }
 }
-
-function fixLocation(location) {
-  var location2 = location;
-
-  if (table.l2f(location2)) {
-    return location2;
-  }
-
-  if (location2.slice(-1) === '/') {
-    location2 += 'index.html';
-  } else {
-    location2 += '/index.html';
-  }
-
-  return location2;
-}
-
 
 module.exports = render;
