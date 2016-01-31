@@ -9,7 +9,7 @@ function render(location, file) {
     return homepage(location, file);
   }
 
-  if (relative === '_templates/tag.hbs') {
+  if (relative === 'tag.hbs') {
     return tags(location, file);
   }
 

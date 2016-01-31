@@ -1,6 +1,6 @@
 var table = require('../table');
 
-var relative = '_templates/tag.hbs';
+var relative = 'tag.hbs';
 
 function finalize(opts) {
   var file = table.record.r2f(relative);
