@@ -6,9 +6,7 @@ function pass(file) {
   if (!file) return null;
 
   if (file.meta('event') !== 'unlink') {
-    var location = locate(file);
-    var locations = location ? [location] : null;
-    table.route.add(file.relative, locations);
+    table.route.add(file.relative, locate(file));
   } else {
     table.route.del(file.relative);
   }
@@ -51,7 +49,7 @@ function locate(file) {
 
   location = permalink(location);
 
-  return location;
+  return location ? [location] : null;
 }
 
 function permalink(location) {

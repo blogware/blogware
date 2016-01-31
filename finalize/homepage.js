@@ -9,9 +9,9 @@ function finalize(opts) {
     return opts;
   }
 
-  var modified = opts.marked.posts || [];
+  var posts = opts.marked.posts || [];
 
-  if (modified.length === 0) {
+  if (posts.length === 0) {
     return opts;
   }
 

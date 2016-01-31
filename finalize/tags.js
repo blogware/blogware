@@ -1,6 +1,7 @@
+var _ = require('lodash');
 var table = require('../table');
 
-var relative = 'tag.hbs';
+var relative = '_layouts/tag.hbs';
 
 function finalize(opts) {
   var file = table.record.r2f(relative);
@@ -9,13 +10,15 @@ function finalize(opts) {
     return opts;
   }
 
-  var modified = opts.marked.posts || [];
+  var modified = (opts.marked.modified || []).map(function(file) {
+    return file.relative;
+  });
 
-  if (modified.length === 0) {
+  var posts = opts.marked.posts || [];
+
+  if (posts.length === 0 && !_.include(modified, relative)) {
     return opts;
   }
-
-  // Paginate tag pages
 
   var perpage = Number(file.meta('matter').perpage);
   var tags = table.tag.all();

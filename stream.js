@@ -21,6 +21,9 @@ function stream() {
       .then(function(file) {
         if (!file) return cb();
 
+        marked.modified = marked.modified || [];
+        marked.modified.push(file);
+
         file.meta('mark').forEach(function(mark) {
           marked[mark] = marked[mark] || [];
           marked[mark].push(file);

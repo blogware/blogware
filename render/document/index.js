@@ -9,7 +9,7 @@ function render(location, file) {
     return homepage(location, file);
   }
 
-  if (relative === 'tag.hbs') {
+  if (relative === '_layouts/tag.hbs') {
     return tags(location, file);
   }
 
