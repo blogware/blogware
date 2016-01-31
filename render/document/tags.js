@@ -98,8 +98,13 @@ function preparePaginator(opts, location, file) {
 
   var relative = file.relative;
   var locations = table.route.r2l(relative);
-  var index = locations.indexOf(location);
+  var base = l2p(location).replace(pattern, '').replace(/\/+/g, '/');
 
+  locations = _.filter(locations, function(entry) {
+    return base === l2p(entry).replace(pattern, '').replace(/\/+/g, '/');
+  });
+
+  var index = locations.indexOf(location);
   var prev = l2p(locations[index - 1]);
   var next = l2p(locations[index + 1]);
 
