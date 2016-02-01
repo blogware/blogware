@@ -25,10 +25,24 @@ function prepareOptions(location, file) {
   var collection = table.collection.all();
 
   opts.data = {};
+
+  // @blogware, @site, @posts, @pages and @current
   _.merge(opts.data, config);
   _.merge(opts.data, collection);
   opts.data.current = file.meta('matter');
 
+  // @tags
+  var tags = [];
+  Object.keys(table.tag.all()).forEach(function(key) {
+    tags. push({
+      title: key,
+      path: '/tag/' + key + '/'
+    });
+  });
+
+  opts.data.tags = tags;
+
+  // @paginator & @paged
   opts.data.paginator = preparePaginator(opts, location, file);
 
   if (opts.data.paginator.page > 1) {
