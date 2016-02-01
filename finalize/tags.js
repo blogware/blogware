@@ -24,18 +24,18 @@ function finalize(opts) {
   var tags = table.tag.all();
   var locations = [];
 
-  Object.keys(tags).forEach(function(tag) {
-    var total = (tags[tag] || []).length;
+  tags.forEach(function(tag) {
+    var total = (tag.posts || []).length;
 
     perpage = perpage || total;
 
     if (perpage) {
       var pages = Math.ceil(total / perpage) || 1;
 
-      locations.push('tag/' + tag + '/index.html');
+      locations.push('tag/' + tag.slug + '/index.html');
 
       for (var i = 2; i <= pages; i++) {
-        locations.push('tag/' + tag + '/page/' + i + '/index.html');
+        locations.push('tag/' + tag.slug + '/page/' + i + '/index.html');
       }
     }
   });

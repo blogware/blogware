@@ -32,15 +32,7 @@ function prepareOptions(location, file) {
   opts.data.current = file.meta('matter');
 
   // @tags
-  var tags = [];
-  Object.keys(table.tag.all()).forEach(function(key) {
-    tags. push({
-      title: key,
-      path: '/tag/' + key + '/'
-    });
-  });
-
-  opts.data.tags = tags;
+  opts.data.tags = table.tag.all();
 
   // @paginator & @paged
   opts.data.paginator = preparePaginator(opts, location, file);

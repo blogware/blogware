@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var collection = require('./collection');
 
 var store1 = {};
 var store2 = {};
@@ -50,7 +51,32 @@ function delVal(store, key, value) {
 }
 
 function all() {
-  return store2;
+  var keys = Object.keys(store2);
+
+  var tags = keys.map(iterator).sort(function(a, b) {
+    store2[b.title].length > store2[a.title].length;
+  });
+
+  return tags;
+}
+
+function iterator(key) {
+  var title = key;
+  var slug = _.kebabCase(key);
+  var path = '/tag/' + slug + '/';
+
+  var posts = (store2[key] || []).map(function(relative) {
+    return collection.get('posts', relative);
+  }).sort(function(a, b) {
+    return b.date > a.date;
+  });
+
+  return {
+    title: title,
+    slug: slug,
+    path: path,
+    posts: posts
+  }
 }
 
 exports.add = add;

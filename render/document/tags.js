@@ -32,25 +32,12 @@ function prepareOptions(location, file) {
   opts.data.current = file.meta('matter');
 
   // @tags
-  var tags = [];
-  Object.keys(table.tag.all()).forEach(function(key) {
-    tags. push({
-      title: key,
-      path: '/tag/' + key + '/'
-    });
-  });
-
-  opts.data.tags = tags;
+  opts.data.tags = table.tag.all();
 
   // tagged @posts
-  var tag = getTag(location);
-  var relatives = table.tag.all()[tag] || [];
-
-  var posts = relatives.map(function(relative) {
-    return table.collection.get('posts', relative);
-  }).sort(function(a, b) {
-    return b.date > a.date;
-  });
+  var slug = getSlug(location);
+  var tag = _.find(opts.data.tags, { slug: slug });
+  var posts = tag ? tag.posts : [];
 
   opts.data.posts = posts;
 
@@ -64,8 +51,8 @@ function prepareOptions(location, file) {
   return opts;
 }
 
-function getTag(location) {
-  var tag;
+function getSlug(location) {
+  var slug;
   var pattern = /^tag\/([^\/]+)\//;
   var matches = location.match(pattern);
 
