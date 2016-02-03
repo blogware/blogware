@@ -24,7 +24,7 @@ function finalize(opts) {
   var tags = table.tag.all();
   var locations = [];
 
-  tags.forEach(function(tag) {
+  _.forEach(tags, function(tag) {
     var total = (tag.posts || []).length;
 
     perpage = perpage || total;

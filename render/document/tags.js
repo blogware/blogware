@@ -37,9 +37,14 @@ function prepareOptions(location, file) {
   // tagged @posts
   var slug = getSlug(location);
   var tag = _.find(opts.data.tags, { slug: slug });
-  var posts = tag ? tag.posts : [];
 
-  opts.data.posts = posts;
+  var posts = (tag.posts || []).map(function(relative) {
+    return table.collection.get('posts', relative);
+  }).sort(function(a, b) {
+    return b.data > a.date;
+  });
+
+  opts.data.posts = posts.length ? posts : null;
 
   // @paginator & @paged
   opts.data.paginator = preparePaginator(opts, location, file);
