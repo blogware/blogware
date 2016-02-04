@@ -34,10 +34,13 @@ function prepareOptions(location, file) {
   // @tags
   opts.data.tags = table.tag.all();
 
-  // tagged @posts
+  // @tag
   var slug = getSlug(location);
   var tag = _.find(opts.data.tags, { slug: slug });
 
+  opts.data.tag = tag;
+
+  // tagged @posts
   var posts = (tag.posts || []).map(function(relative) {
     return table.collection.get('posts', relative);
   }).sort(function(a, b) {

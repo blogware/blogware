@@ -12,7 +12,7 @@ function del(group) {
   store[group] = {};
 }
 
-function all(group) {
+function all() {
   return store;
 }
 

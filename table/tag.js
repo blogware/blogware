@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var config = require('./config');
 var collection = require('./collection');
 
 var store1 = {};
@@ -52,19 +53,26 @@ function delVal(store, key, value) {
 
 function all() {
   var tags = {};
+  var site = config.all().site;
 
   Object.keys(store2).forEach(function(key) {
     var title = key;
     var slug = _.kebabCase(key);
-    var path = '/tag/' + slug + '/';
     var posts = store2[key];
 
-    tags[key] = {
+    var tag = {
       title: title,
       slug: slug,
-      path: path,
       posts: posts
     };
+
+    if (site.tags) {
+      tag = _.merge(tag, site.tags[key]);
+    }
+
+    tag.path = '/tag/' + tag.slug + '/';
+
+    tags[key] = tag;
   });
 
   return tags;
