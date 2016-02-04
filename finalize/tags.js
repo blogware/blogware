@@ -16,7 +16,7 @@ function finalize(opts) {
 
   var posts = opts.marked.posts || [];
 
-  if (posts.length === 0 && !_.include(modified, relative)) {
+  if (posts.length === 0 && !_.include(modified, relative) && !_.include(modified, '_config.yml')) {
     return opts;
   }
 

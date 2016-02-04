@@ -15,8 +15,9 @@ function register() {
   packages.forEach(function(package) {
     if (pattern.test(package)) {
       var opts = {
-        config: table.config.all(),
-        collection: table.collection.all()
+        config: table.config,
+        collection: table.collection,
+        tag: table.tag
       };
       registerPlugin(require(package).create(opts));
     }

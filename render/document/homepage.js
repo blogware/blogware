@@ -32,7 +32,8 @@ function prepareOptions(location, file) {
   opts.data.current = file.meta('matter');
 
   // @tags
-  opts.data.tags = table.tag.all();
+  var tags = table.tag.all();
+  opts.data.tags = Object.keys(tags);
 
   // @paginator & @paged
   opts.data.paginator = preparePaginator(opts, location, file);

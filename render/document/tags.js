@@ -32,11 +32,12 @@ function prepareOptions(location, file) {
   opts.data.current = file.meta('matter');
 
   // @tags
-  opts.data.tags = table.tag.all();
+  var tags = table.tag.all();
+  opts.data.tags = Object.keys(tags);
 
   // @tag
   var slug = getSlug(location);
-  var tag = _.find(opts.data.tags, { slug: slug });
+  var tag = _.find(tags, { slug: slug });
 
   opts.data.tag = tag;
 
@@ -44,7 +45,7 @@ function prepareOptions(location, file) {
   var posts = (tag.posts || []).map(function(relative) {
     return table.collection.get('posts', relative);
   }).sort(function(a, b) {
-    return b.data > a.date;
+    return b.date > a.date;
   });
 
   opts.data.posts = posts.length ? posts : null;
