@@ -35,6 +35,20 @@ function prepareOptions(location, file) {
   var tags = table.tag.all();
   opts.data.tags = Object.keys(tags);
 
+  // @navigation
+  var navigation = _.cloneDeep(opts.data.site.navigation);
+
+  navigation.forEach(function(item) {
+    var path1 = l2p(location).replace(/\/+$/, '');
+    var path2 = item.path.replace(/index.html$/, '').replace(/\/+$/, '');
+
+    if (path1 === path2) {
+      item.current = true;
+    }
+  });
+
+  opts.data.navigation = navigation;
+
   // @tag
   var slug = getSlug(location);
   var tag = _.find(tags, { slug: slug });

@@ -35,7 +35,32 @@ function prepareOptions(location, file) {
   var tags = table.tag.all();
   opts.data.tags = Object.keys(tags);
 
+  // @navigation
+  var navigation = _.cloneDeep(opts.data.site.navigation);
+
+  navigation.forEach(function(item) {
+    var path1 = l2p(location).replace(/\/+$/, '');
+    var path2 = item.path.replace(/index.html$/, '').replace(/\/+$/, '');
+
+    if (path1 === path2) {
+      item.current = true;
+    }
+  });
+
+  opts.data.navigation = navigation;
+
   return opts;
+}
+
+function l2p(location) {
+  if (!location) return null;
+
+  var path2 = location;
+
+  path2 = '/' + path2;
+  path2 = path2.replace(/index.html$/, '');
+
+  return path2;
 }
 
 module.exports = render;
