@@ -1,6 +1,7 @@
 var steps = [
   'convert',  // converting markup files
   'homepage', // paginating the homepage
+  'authors',  // paginating the author pages
   'tags',     // paginating the tag pages
   'generate'  // generating files
 ]

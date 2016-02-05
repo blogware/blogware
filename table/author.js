@@ -1,4 +1,5 @@
 var _ = require('lodash');
+var config = require('./config');
 
 var store1 = {}; // relative -> author
 var store2 = {}; // author -> relatives
@@ -38,5 +39,33 @@ function delVal(store, key, value) {
   }
 }
 
+function all() {
+  var authors = {};
+  var site = config.all().site;
+
+  Object.keys(store2).forEach(function(key) {
+    var title = key;
+    var slug = _.kebabCase(key);
+    var posts = store2[key];
+
+    var author = {
+      title: title,
+      slug: slug,
+      posts: posts
+    };
+
+    if (site.authors) {
+      author = _.merge(author, site.authors[key]);
+    }
+
+    author.path = '/author/' + author.slug + '/';
+
+    authors[key] = author;
+  });
+
+  return authors;
+}
+
 exports.add = add;
 exports.del = del;
+exports.all = all;

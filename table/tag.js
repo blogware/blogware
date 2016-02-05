@@ -1,6 +1,5 @@
 var _ = require('lodash');
 var config = require('./config');
-var collection = require('./collection');
 
 var store1 = {};
 var store2 = {};
