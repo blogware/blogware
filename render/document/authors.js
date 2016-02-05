@@ -49,14 +49,15 @@ function prepareOptions(location, file) {
 
   opts.data.navigation = navigation;
 
-  // @tag
+  // @author
+  var authors = table.author.all();
   var slug = getSlug(location);
-  var tag = _.find(tags, { slug: slug });
+  var author = _.find(authors, { slug: slug });
 
-  opts.data.tag = tag;
+  opts.data.author = author;
 
-  // tagged @posts
-  var posts = (tag.posts || []).map(function(relative) {
+  // @posts by @author
+  var posts = (author.posts || []).map(function(relative) {
     return table.collection.get('posts', relative);
   }).sort(function(a, b) {
     return b.date > a.date;
@@ -76,7 +77,7 @@ function prepareOptions(location, file) {
 
 function getSlug(location) {
   var slug;
-  var pattern = /^tag\/([^\/]+)\//;
+  var pattern = /^author\/([^\/]+)\//;
   var matches = location.match(pattern);
 
   if (matches) {

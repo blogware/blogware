@@ -1,4 +1,5 @@
 var homepage = require('./homepage');
+var authors = require('./authors');
 var tags = require('./tags');
 var other = require('./other');
 
@@ -7,6 +8,10 @@ function render(location, file) {
 
   if (relative === 'index.hbs') {
     return homepage(location, file);
+  }
+
+  if (relative === '_layouts/author.hbs') {
+    return authors(location, file);
   }
 
   if (relative === '_layouts/tag.hbs') {
