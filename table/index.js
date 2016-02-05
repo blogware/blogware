@@ -1,5 +1,6 @@
 var record = require('./record');
 var route = require('./route');
+var author = require('./author');
 var tag = require('./tag');
 var collection = require('./collection');
 var config = require('./config');
@@ -13,6 +14,7 @@ function l2f(location) {
 
 exports.record = record;
 exports.route = route;
+exports.author = author;
 exports.tag = tag;
 exports.collection = collection;
 exports.config = config;
