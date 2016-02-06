@@ -1,6 +1,5 @@
 var _ = require('lodash');
 var path = require('path');
-var table = require('../../table');
 var renderFile = require('./util').renderFile;
 
 function render(location, file, opts) {
@@ -20,8 +19,8 @@ function render(location, file, opts) {
 }
 
 function updateOptions(location, file, opts) {
-  var authors = table.author.all();
-  var tags = table.tag.all();
+  var authors = opts.data.authors;
+  var tags = opts.data.tags;
 
   // @posts
   var posts = (opts.data.posts || []).sort(function(a, b) {
@@ -29,7 +28,7 @@ function updateOptions(location, file, opts) {
   });
 
   posts = posts.map(function(post) {
-    var _post = _.cloneDeep(post);
+    var _post = _.clone(post);
 
     if (_post.author) {
       _post.author = authors[_post.author];

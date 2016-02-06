@@ -16,11 +16,11 @@ function prepareOptions(location, file) {
 
   // @authors
   var authors = table.author.all();
-  opts.data.authors = Object.keys(authors);
+  opts.data.authors = authors;
 
   // @tags
   var tags = table.tag.all();
-  opts.data.tags = Object.keys(tags);
+  opts.data.tags = tags;
 
   // @navigation
   var navigation = _.map(opts.data.site.navigation || [], function(value, key) {

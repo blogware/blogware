@@ -21,7 +21,6 @@ function pass(file) {
 
       file.meta('originalContents', contents);
       file.meta('matter', parsed.data || {});
-      file.meta('originalMatter', _.cloneDeep(file.meta('matter')));
       file.contents = new Buffer(parsed.content);
 
       resolve(file);

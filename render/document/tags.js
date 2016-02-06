@@ -21,8 +21,8 @@ function render(location, file, opts) {
 }
 
 function updateOptions(location, file, opts) {
-  var authors = table.author.all();
-  var tags = table.tag.all();
+  var authors = opts.data.authors;
+  var tags = opts.data.tags;
 
   // @tag
   var slug = getSlug(location);
@@ -38,7 +38,7 @@ function updateOptions(location, file, opts) {
   });
 
   posts = posts.map(function(post) {
-    var _post = _.cloneDeep(post);
+    var _post = _.clone(post);
 
     if (_post.author) {
       _post.author = authors[_post.author];
