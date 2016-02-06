@@ -1,7 +1,7 @@
 var _ = require('lodash');
 var path = require('path');
 var table = require('../../table');
-var renderFile = require('./render-file');
+var renderFile = require('./util').renderFile;
 
 function render(location, file) {
   return new Promise(function(resolve, reject) {

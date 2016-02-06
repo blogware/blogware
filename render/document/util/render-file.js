@@ -1,6 +1,6 @@
 var path = require('path');
-var table = require('../../table');
-var plugin = require('../../plugin');
+var table = require('../../../table');
+var plugin = require('../../../plugin');
 
 function renderFile(file, opts, cb) {
   opts.__layout = opts.__layout || {};
