@@ -9,10 +9,9 @@ function prepareOptions(location, file) {
 
   opts.data = {};
 
-  // @blogware, @site, @posts, @pages and @current
+  // @blogware, @site, @posts & @pages
   _.merge(opts.data, config);
   _.merge(opts.data, collection);
-  opts.data.current = file.meta('matter');
 
   // @authors
   var authors = table.author.all();
@@ -43,24 +42,16 @@ function prepareOptions(location, file) {
     return b.date > a.date;
   });
 
-  posts = posts.map(function(post) {
-    var _post = _.clone(post);
-
-    if (_post.author) {
-      _post.author = authors[_post.author];
-    }
-
-    if (_post.tags) {
-      _post.tags = _.isArray(_post.tags) ? _post.tags : [_post.tags]
-      _post.tags = _post.tags.map(function(tag) {
-        return tags[tag];
-      });
-    }
-
-    return _post;
-  });
+  posts = posts.map(expand);
 
   opts.data.posts = posts.length ? posts : null;
+
+  // @current
+  var current = file.meta('matter');
+
+  current = expand(current);
+
+  opts.data.current = current;
 
   // @navigation
   var navigation = _.map(opts.data.site.navigation || [], function(value, key) {
@@ -82,6 +73,23 @@ function prepareOptions(location, file) {
   opts.data.navigation = navigation.length ? navigation : null;
 
   return opts;
+
+  function expand(post) {
+    var _post = _.clone(post);
+
+    if (_post.author) {
+      _post.author = authors[_post.author];
+    }
+
+    if (_post.tags) {
+      _post.tags = _.isArray(_post.tags) ? _post.tags : [_post.tags]
+      _post.tags = _post.tags.map(function(tag) {
+        return tags[tag];
+      });
+    }
+
+    return _post;
+  }
 }
 
 module.exports = prepareOptions;

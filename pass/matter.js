@@ -21,6 +21,7 @@ function pass(file) {
 
       file.meta('originalContents', contents);
       file.meta('matter', parsed.data || {});
+      file.meta('matter').relative = file.relative;
       file.contents = new Buffer(parsed.content);
 
       resolve(file);
