@@ -65,7 +65,18 @@ function prepareOptions(location, file) {
 
   posts = posts.map(function(post) {
     var _post = _.cloneDeep(post);
-    _post.author = authors[_post.author];
+
+    if (_post.author) {
+      _post.author = authors[_post.author];
+    }
+
+    if (_post.tags) {
+      _post.tags = _.isArray(_post.tags) ? _post.tags : [_post.tags]
+      _post.tags = _post.tags.map(function(tag) {
+        return tags[tag];
+      });
+    }
+
     return _post;
   });
 
