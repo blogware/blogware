@@ -22,6 +22,46 @@ function prepareOptions(location, file) {
   var tags = table.tag.all();
   opts.data.tags = tags;
 
+  // tags = _.map(tags || [], function(tag) {
+  //   var _tag = _.clone(tag);
+
+  //   if (_tag.posts) {
+  //     _tag.posts = _tag.posts.map(function(relative) {
+  //       return table.collection.get('posts', relative);
+  //     }).sort(function(a, b) {
+  //       return b.date > a.date;
+  //     });
+  //   }
+
+  //   return _tag;
+  // });
+
+  // opts.data.tags = tags.length ? tags : null;
+
+  // @posts
+  var posts = (opts.data.posts || []).sort(function(a, b) {
+    return b.date > a.date;
+  });
+
+  posts = posts.map(function(post) {
+    var _post = _.clone(post);
+
+    if (_post.author) {
+      _post.author = authors[_post.author];
+    }
+
+    if (_post.tags) {
+      _post.tags = _.isArray(_post.tags) ? _post.tags : [_post.tags]
+      _post.tags = _post.tags.map(function(tag) {
+        return tags[tag];
+      });
+    }
+
+    return _post;
+  });
+
+  opts.data.posts = posts.length ? posts : null;
+
   // @navigation
   var navigation = _.map(opts.data.site.navigation || [], function(value, key) {
     return {

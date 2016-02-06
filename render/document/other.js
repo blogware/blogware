@@ -1,4 +1,3 @@
-var _ = require('lodash');
 var path = require('path');
 var renderFile = require('./util').renderFile;
 
@@ -19,33 +18,6 @@ function render(location, file, opts) {
 }
 
 function updateOptions(location, file, opts) {
-  var authors = opts.data.authors;
-  var tags = opts.data.tags;
-
-  // @posts
-  var posts = (opts.data.posts || []).sort(function(a, b) {
-    return b.date > a.date;
-  });
-
-  posts = posts.map(function(post) {
-    var _post = _.clone(post);
-
-    if (_post.author) {
-      _post.author = authors[_post.author];
-    }
-
-    if (_post.tags) {
-      _post.tags = _.isArray(_post.tags) ? _post.tags : [_post.tags]
-      _post.tags = _post.tags.map(function(tag) {
-        return tags[tag];
-      });
-    }
-
-    return _post;
-  });
-
-  opts.data.posts = posts.length ? posts : null;
-
   return opts;
 }
 
