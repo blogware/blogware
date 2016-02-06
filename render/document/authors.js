@@ -40,7 +40,12 @@ function prepareOptions(location, file) {
   opts.data.tags = Object.keys(tags);
 
   // @navigation
-  var navigation = _.cloneDeep(opts.data.site.navigation);
+  var navigation = _.map(opts.data.site.navigation || [], function(value, key) {
+    return {
+      title: key,
+      path: value
+    };
+  });
 
   navigation.forEach(function(item) {
     var path1 = l2p(location).replace(/\/+$/, '');
@@ -51,7 +56,7 @@ function prepareOptions(location, file) {
     }
   });
 
-  opts.data.navigation = navigation;
+  opts.data.navigation = navigation.length ? navigation : null;
 
   // @author
   var slug = getSlug(location);
