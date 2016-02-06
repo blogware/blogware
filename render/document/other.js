@@ -2,6 +2,7 @@ var _ = require('lodash');
 var path = require('path');
 var table = require('../../table');
 var renderFile = require('./util').renderFile;
+var l2p = require('./util').l2p;
 
 function render(location, file) {
   return new Promise(function(resolve, reject) {
@@ -83,17 +84,6 @@ function prepareOptions(location, file) {
   opts.data.posts = posts.length ? posts : null;
 
   return opts;
-}
-
-function l2p(location) {
-  if (!location) return null;
-
-  var path2 = location;
-
-  path2 = '/' + path2;
-  path2 = path2.replace(/index.html$/, '');
-
-  return path2;
 }
 
 module.exports = render;
