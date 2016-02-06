@@ -31,6 +31,10 @@ function prepareOptions(location, file) {
   _.merge(opts.data, collection);
   opts.data.current = file.meta('matter');
 
+  // @authors
+  var authors = table.author.all();
+  opts.data.authors = Object.keys(authors);
+
   // @tags
   var tags = table.tag.all();
   opts.data.tags = Object.keys(tags);
@@ -48,6 +52,19 @@ function prepareOptions(location, file) {
   });
 
   opts.data.navigation = navigation;
+
+  // @posts
+  var posts = (opts.data.posts || []).sort(function(a, b) {
+    return b.date > a.date;
+  });
+
+  posts = posts.map(function(post) {
+    var _post = _.cloneDeep(post);
+    _post.author = authors[_post.author];
+    return _post;
+  });
+
+  opts.data.posts = posts.length ? posts : null;
 
   // @paginator & @paged
   opts.data.paginator = preparePaginator(opts, location, file);
