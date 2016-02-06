@@ -5,10 +5,10 @@ var renderFile = require('./util').renderFile;
 var preparePaginator = require('./util').preparePaginator;
 var l2p = require('./util').l2p;
 
-function render(location, file) {
-  return new Promise(function(resolve, reject) {
-    var opts = prepareOptions(location, file);
+function render(location, file, opts) {
+  updateOptions(location, file, opts);
 
+  return new Promise(function(resolve, reject) {
     renderFile(file, opts, function(err, rendered) {
       if (err) return reject(err);
 
@@ -21,44 +21,9 @@ function render(location, file) {
   });
 }
 
-function prepareOptions(location, file) {
-  var opts = {};
-  var config = table.config.all();
-  var collection = table.collection.all();
-
-  opts.data = {};
-
-  // @blogware, @site, @posts, @pages and @current
-  _.merge(opts.data, config);
-  _.merge(opts.data, collection);
-  opts.data.current = file.meta('matter');
-
-  // @authors
+function updateOptions(location, file, opts) {
   var authors = table.author.all();
-  opts.data.authors = Object.keys(authors);
-
-  // @tags
   var tags = table.tag.all();
-  opts.data.tags = Object.keys(tags);
-
-  // @navigation
-  var navigation = _.map(opts.data.site.navigation || [], function(value, key) {
-    return {
-      title: key,
-      path: value
-    };
-  });
-
-  navigation.forEach(function(item) {
-    var path1 = l2p(location).replace(/\/+$/, '');
-    var path2 = item.path.replace(/index.html$/, '').replace(/\/+$/, '');
-
-    if (path1 === path2) {
-      item.current = true;
-    }
-  });
-
-  opts.data.navigation = navigation.length ? navigation : null;
 
   // @posts
   var posts = (opts.data.posts || []).sort(function(a, b) {
