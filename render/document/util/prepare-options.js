@@ -53,6 +53,18 @@ function prepareOptions(location, file) {
 
   opts.data.current = current;
 
+  // @next & @prev
+  var relatives = _.map(opts.data.posts, function(post) {
+    return post.relative;
+  });
+
+  var index = relatives && relatives.indexOf(opts.data.current.relative);
+  var next = index >= 0 ? opts.data.posts[index - 1] : null;
+  var prev = index >= 0 ? opts.data.posts[index + 1] : null;
+
+  opts.data.next = next;
+  opts.data.prev = prev;
+
   // @navigation
   var navigation = _.map(opts.data.site.navigation || [], function(value, key) {
     return {
