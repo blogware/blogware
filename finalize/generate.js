@@ -6,6 +6,14 @@ function finalize(opts) {
   var stream = opts.stream;
   var files = opts.marked.generate || [];
 
+  if (process.env.NODE_ENV !== 'development') {
+    var author = table.record.r2f('_layouts/author.hbs');
+    if (author) files.push(author);
+
+    var tag = table.record.r2f('_layouts/tag.hbs');
+    if (tag) files.push(tag);
+  }
+
   var push = stream.push.bind(stream);
 
   var promises = files.map(function(file) {
