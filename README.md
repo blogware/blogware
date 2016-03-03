@@ -1,27 +1,8 @@
 # Blogware
 
-A Jekyll-like static site generator that's incredibly fast.
+Create a Ghost blog and host it on GitHub Pages.
 
-## Feature highlights
-
-Fast:
-
-  * Getting instant feedback in 20ms no matter what
-
-Convenient:
-
-  * Writing with GitHub Flavored Markdown
-  * Adding Frontmatter to posts and pages
-  * Templating with Handlebars
-  * Styling with Sass
-  * Browser live reload
-
-Easy:
-
-  * Only three tasks to remember: `serve`, `preview` and `publish`
-
-
-## Quick start
+## Installation
 
 Install `blogware` globally with `npm`:
 
@@ -29,10 +10,12 @@ Install `blogware` globally with `npm`:
 $ npm install -g blogware
 ```
 
+## Quick start
+
 Download a prebuilt theme:
 
 ```
-$ git clone https://github.com/blogware/blogware-theme-jekyll myblog
+$ git clone https://github.com/blogware/blogware-theme-casper myblog
 $ cd myblog
 ```
 
