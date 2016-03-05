@@ -1,7 +1,7 @@
 {
   "name": "blogware",
   "version": "0.0.5",
-  "description": "Create a Ghost blog and host it on GitHub Pages."
+  "description": "A static site generator for hosting full-featured Ghost blog on GitHub Pages.",
   "license": "MIT",
   "bin": {
     "blogware": "./bin/blogware.js"
