@@ -1,6 +1,6 @@
 {
   "name": "blogware",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A static site generator for hosting full-featured Ghost blog on GitHub Pages.",
   "license": "MIT",
   "bin": {
