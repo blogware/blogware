@@ -1,12 +1,21 @@
 {
   "name": "blogware",
   "version": "0.0.5",
+  "description": "Create a Ghost blog and host it on GitHub Pages."
+  "license": "MIT",
   "bin": {
     "blogware": "./bin/blogware.js"
   },
   "repository": {
     "url": "https://github.com/blogware/blogware"
   },
+  "keywords": [
+    "static site generator",
+    "blogging software",
+    "Ghost",
+    "Jekyll",
+    "GitHub Pages"
+  ],
   "dependencies": {
     "blogware-cli": "github:blogware/blogware-cli#4.0",
     "blogware-plugin-handlebars": "^0.0.2",
